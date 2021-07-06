@@ -28,12 +28,17 @@ class LoginForm extends ModalComponent
         $credentials = ['email' => $this->email, 'password' => $this->password];
         if (Auth::attempt($credentials, $this->remember)) {
             session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->intended('admin/dashboard');
         }
 
         $this->password = "";
         throw ValidationException::withMessages([
             'email' => 'Email ou mot de passe incorrect.',
         ]);
+    }
+
+    public static function modalMaxWidth(): string
+    {
+        return 'md';
     }
 }
