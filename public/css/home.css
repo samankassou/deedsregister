@@ -1,0 +1,6 @@
+body{
+    background-image: url('./../images/scb_bg.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
