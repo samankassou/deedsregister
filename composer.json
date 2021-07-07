@@ -12,7 +12,8 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "livewire-ui/modal": "^1.0",
-        "livewire/livewire": "^2.5"
+        "livewire/livewire": "^2.5",
+        "santigarcor/laratrust": "^6.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

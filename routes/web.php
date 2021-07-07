@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Dashboard;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,6 @@ Route::group(
     ],
     function () {
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
+        Route::resource('users', UserController::class);
     }
 );
