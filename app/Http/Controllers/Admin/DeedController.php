@@ -15,7 +15,12 @@ class DeedController extends Controller
      */
     public function index()
     {
-        $deeds = Deed::paginate(10);
+        $deeds = Deed::with([
+            'pole',
+            'agency',
+            'warranty',
+            'typeOfRequests'
+        ])->paginate(10);
         return view('admin.deeds.index', compact('deeds'));
     }
 

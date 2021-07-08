@@ -17,8 +17,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AgencySeeder::class,
             PoleSeeder::class,
+            TypeOfRequestSeeder::class,
             WarrantySeeder::class,
-            DeedSeeder::class
+            DeedSeeder::class,
+            TypeOfRequestSeeder::class
         ]);
     }
 }

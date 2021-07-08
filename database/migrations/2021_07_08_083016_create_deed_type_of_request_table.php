@@ -15,8 +15,8 @@ class CreateDeedTypeOfRequestTable extends Migration
     {
         Schema::create('deed_type_of_request', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('deed_id')->constrained();
-            $table->foreignId('type_of_request_id')->constrained();
+            $table->foreignId('deed_id')->constrained('deeds');
+            $table->foreignId('type_of_request_id')->constrained('type_of_requests');
             $table->timestamps();
         });
     }
