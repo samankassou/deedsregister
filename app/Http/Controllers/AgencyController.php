@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Agency;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AgencyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
-        return view('admin.users.index', compact('users'));
+        //
     }
 
     /**
@@ -43,10 +41,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Agency  $agency
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Agency $agency)
     {
         //
     }
@@ -54,10 +52,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Agency  $agency
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Agency $agency)
     {
         //
     }
@@ -66,10 +64,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Agency  $agency
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Agency $agency)
     {
         //
     }
@@ -77,10 +75,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Agency  $agency
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Agency $agency)
     {
         //
     }

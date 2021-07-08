@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Deed;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class DeedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
-        return view('admin.users.index', compact('users'));
+        $deeds = Deed::paginate(10);
+        return view('admin.deeds.index', compact('deeds'));
     }
 
     /**
@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.deeds.create');
     }
 
     /**
@@ -43,10 +43,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Deed  $deed
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Deed $deed)
     {
         //
     }
@@ -54,10 +54,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Deed  $deed
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Deed $deed)
     {
         //
     }
@@ -66,10 +66,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Deed  $deed
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Deed $deed)
     {
         //
     }
@@ -77,10 +77,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Deed  $deed
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Deed $deed)
     {
         //
     }

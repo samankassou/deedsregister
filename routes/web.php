@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\Dashboard;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\Dashboard;
+use App\Http\Controllers\Admin\DeedController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ Route::group(
     ],
     function () {
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
+        Route::resource('deeds', DeedController::class);
         Route::resource('users', UserController::class);
     }
 );
