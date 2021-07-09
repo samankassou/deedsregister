@@ -16,13 +16,7 @@ class DeedController extends Controller
      */
     public function index()
     {
-        $deeds = Deed::with([
-            'pole',
-            'agency',
-            'warranty',
-            'typeOfRequests'
-        ])->paginate(10);
-        return view('admin.deeds.index', compact('deeds'));
+        return view('admin.deeds.index');
     }
 
     /**
@@ -89,5 +83,15 @@ class DeedController extends Controller
     public function destroy(Deed $deed)
     {
         //
+    }
+
+    /**
+     * List deleted resources.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleted()
+    {
+        return view('admin.deeds.deleted.index');
     }
 }

@@ -19,5 +19,7 @@
         "postcss": "^8.3.5",
         "tailwindcss": "^2.2.4"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@tailwindcss/forms": "^0.3.3"
+    }
 }
