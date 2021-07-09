@@ -14,9 +14,8 @@ trait HasRandomId
     public static function getRandomId(int $number = null)
     {
         if (is_null($number)) {
-            return Self::all(['*'])->random(1)->first()->id;
+            return Self::pluck('id')->random();
         }
-        return
-            Self::all(['*'])->random((int)$number)->toArray();
+        return Self::pluck('id')->random((int)$number)->toArray();
     }
 }

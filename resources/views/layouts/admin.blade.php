@@ -1,6 +1,7 @@
 @extends('layouts.app', ['title' => $title])
 @section('styles')
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    @laravelViewsStyles('laravel-views')
     <script src="{{ asset('template/js/init-alpine.js') }}"></script>
 @endsection
 @section('main')
@@ -235,4 +236,7 @@
         </main>
     </div>
 </div>
+@endsection
+@section('scripts')
+    @laravelViewsScripts('laravel-views')
 @endsection

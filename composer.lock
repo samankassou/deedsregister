@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d09ad2ee61793caa5fab3829c1a6d38",
+    "content-hash": "5c940aaf72c39c9e83cd244dde54bfb2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -961,6 +961,65 @@
                 "source": "https://github.com/kkszymanowski/traitor"
             },
             "time": "2018-04-19T12:24:36+00:00"
+        },
+        {
+            "name": "laravel-views/laravel-views",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Gustavinho/laravel-views.git",
+                "reference": "486bfb4c119d7cdb6e396157baf41d5ee7e47e73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Gustavinho/laravel-views/zipball/486bfb4c119d7cdb6e396157baf41d5ee7e47e73",
+                "reference": "486bfb4c119d7cdb6e396157baf41d5ee7e47e73",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "2.*"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "^1.1",
+                "orchestra/testbench": "4.*|5.*|6.*",
+                "phpunit/phpunit": "7.0.*|8.5.*|9.5.*",
+                "spatie/laravel-ray": "^1.12"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelViews\\LaravelViewsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelViews": "LaravelViews\\Facades\\LaravelViews",
+                        "Variants": "LaravelViews\\Facades\\Variants",
+                        "UI": "LaravelViews\\Facades\\UI"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelViews\\": "src",
+                    "LaravelViews\\Test\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gustavo Martinez",
+                    "email": "gustavinho.martinez@gmail.com"
+                }
+            ],
+            "description": "Laravel package to create beautiful common views like tables using only PHP code",
+            "support": {
+                "issues": "https://github.com/Gustavinho/laravel-views/issues",
+                "source": "https://github.com/Gustavinho/laravel-views/tree/v2.3.0"
+            },
+            "time": "2021-06-27T01:38:38+00:00"
         },
         {
             "name": "laravel/framework",
