@@ -16,7 +16,8 @@ class DeedController extends Controller
      */
     public function index()
     {
-        return view('admin.deeds.index');
+        $deletedDeedsCount = Deed::onlyTrashed()->count();
+        return view('admin.deeds.index', compact('deletedDeedsCount'));
     }
 
     /**
