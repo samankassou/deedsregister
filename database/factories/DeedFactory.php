@@ -27,7 +27,7 @@ class DeedFactory extends Factory
         return [
             'client'                         => $this->faker->name(),
             'notary'                         => $this->faker->name(),
-            'purpose_of_the_credit'          => $this->faker->paragraph(),
+            'purpose_of_the_credit'          => $this->faker->paragraph(1),
             'reference_of_credit_decision'   => $this->faker->unique()->numberBetween(1, 1000),
             'date_of_receipt_of_the_request' => $this->faker->dateTimeBetween('-2 years'),
             'debit_advice_notified'          => $this->faker->randomElement([null, 'oui', 'non']),

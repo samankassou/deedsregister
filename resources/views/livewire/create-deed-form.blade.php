@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-span-6 sm:col-span-3">
                         <label for="client" class="block text-sm font-medium text-gray-700">Client<sup class="text-red-500">*</sup></label>
-                        <input type="text" wire:model="client" id="client" autocomplete="given-name"
+                        <input type="text" wire:model="client" id="client"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md @error('client') is-invalid @enderror">
                         @error('client') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
@@ -26,7 +26,7 @@
 
                     <div class="col-span-6 sm:col-span-3">
                        <label for="pole" class="block text-sm font-medium text-gray-700">Pôle<sup class="text-red-500">*</sup></label>
-                        <select id="pole" wire:model="pole" autocomplete="pole"
+                        <select id="pole" wire:model="pole"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value="" class="text-gray-300">Sélectionnez un pôle</option>
                             @foreach ($poles as $pole)
@@ -38,7 +38,7 @@
 
                     <div class="col-span-6 sm:col-span-3">
                         <label for="warranty" class="block text-sm font-medium text-gray-700">Type de garantie<sup class="text-red-500">*</sup></label>
-                        <select id="warranty" wire:model="warranty" autocomplete="warranty"
+                        <select id="warranty" wire:model="warranty"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value="" class="text-gray-300">Sélectionner un acte</option>
                             @foreach ($warranties as $warranty)
@@ -49,31 +49,31 @@
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="street-address" class="block text-sm font-medium text-gray-700">Référence décision de crédit<sup class="text-red-500">*</sup></label>
-                        <input type="text" name="street-address" id="street-address" autocomplete="street-address"
+                        <label for="referenceOfCreditDecision" class="block text-sm font-medium text-gray-700">Référence décision de crédit<sup class="text-red-500">*</sup></label>
+                        <input type="text" id="referenceOfCreditDecision" wire:model="referenceOfCreditDecision"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="street-address" class="block text-sm font-medium text-gray-700">Objet du crédit<sup class="text-red-500">*</sup></label>
-                        <input type="text" name="street-address" id="street-address" autocomplete="street-address"
-                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                    </div>
-
-                    <div class="col-span-6 sm:col-span-3">
-                        <label for="city" class="block text-sm font-medium text-gray-700">Notaire</label>
-                        <input type="text" name="city" id="city"
+                        <label for="purposeOfTheCredit" class="block text-sm font-medium text-gray-700">Objet du crédit<sup class="text-red-500">*</sup></label>
+                        <input type="text" wire:model="purposeOfTheCredit" id="purposeOfTheCredit"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="state" class="block text-sm font-medium text-gray-700">Correspondant du notaire</label>
-                        <input type="text" name="state" id="state"
+                        <label for="notary" class="block text-sm font-medium text-gray-700">Notaire</label>
+                        <input type="text" wire:model="notary" id="notary"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="postal-code" class="block text-sm font-medium text-gray-700">Date réception demande</label>
-                        <x-date-picker wire:model="dateOfReceiptOfTheRequest"
+                        <label for="correspondentOfTheNotary" class="block text-sm font-medium text-gray-700">Correspondant du notaire</label>
+                        <input type="text" wire:model="correspondentOfTheNotary" id="correspondentOfTheNotary"
+                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="dateOfReceiptOfTheRequest" class="block text-sm font-medium text-gray-700">Date réception demande</label>
+                        <x-date-picker wire:model="dateOfReceiptOfTheRequest" id="dateOfReceiptOfTheRequest"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                     </div>
                     <div class="col-span-6 sm:col-span-3">
@@ -83,19 +83,19 @@
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="postal-code" class="block text-sm font-medium text-gray-700">Référence avis d'imposition</label>
-                        <input type="text" name="street-address" id="street-address" autocomplete="street-address"
+                        <label for="taxNoticeReference" class="block text-sm font-medium text-gray-700">Référence avis d'imposition</label>
+                        <input type="text" wire:model="taxNoticeReference" id="taxNoticeReference"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="typesOfRequest" class="block text-sm font-medium text-gray-700">Avis de débit notifié au client?</label>
-                        <select
+                        <label for="debitAdviceNotified" class="block text-sm font-medium text-gray-700">Avis de débit notifié au client?</label>
+                        <select wire:model="debitAdviceNotified" id="debitAdviceNotified"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value=""></option>
                             <option value="Oui">Oui</option>
                             <option value="Non">Non</option>
                         </select>
-                        @error('typesOfRequest') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+                        @error('debitAdviceNotified') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
 
                     @if (collect($typesOfRequest)->contains($typesOfRequests->firstWhere('name', 'Rédaction')->id))
@@ -121,22 +121,22 @@
                                         <div class="px-4 py-5 bg-white sm:p-6">
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="name" class="block text-sm font-medium text-gray-700">Date de complétude</label>
-                                                    <x-date-picker
+                                                    <label for="writtingCompletionDate" class="block text-sm font-medium text-gray-700">Date de complétude</label>
+                                                    <x-date-picker wire:model="writtingCompletionDate" id="writtingCompletionDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Date fin
+                                                    <label for="writtingEndDate" class="block text-sm font-medium text-gray-700">Date fin
                                                         rédaction</label>
-                                                    <x-date-picker
+                                                    <x-date-picker wire:model="writtingEndDate" id="writtingEndDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Date de
+                                                    <label for="signatureDate" class="block text-sm font-medium text-gray-700">Date de
                                                         signature</label>
-                                                    <x-date-picker
+                                                    <x-date-picker wire:model="signatureDate" id="signatureDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 </div>
 
@@ -171,21 +171,21 @@
                                         <div class="px-4 py-5 bg-white sm:p-6">
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="name" class="block text-sm font-medium text-gray-700">Date d'envoi</label>
-                                                    <x-date-picker
+                                                    <label for="registrationSendingDate" class="block text-sm font-medium text-gray-700">Date d'envoi</label>
+                                                    <x-date-picker wire:model="registrationSendingDate" id="registrationSendingDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Date retour</label>
-                                                    <x-date-picker
+                                                    <label for="registrationReturnDate" class="block text-sm font-medium text-gray-700">Date retour</label>
+                                                    <x-date-picker wire:model="registrationReturnDate" id="registrationReturnDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Montant</label>
-                                                    <x-date-picker
-                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    <label for="writtingAmount" class="block text-sm font-medium text-gray-700">Montant</label>
+                                                    <input type="text" wire:model="writtingAmount" id="writtingAmount"
+                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                 </div>
 
                                             </div>
@@ -219,36 +219,36 @@
                                         <div class="px-4 py-5 bg-white sm:p-6">
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="name" class="block text-sm font-medium text-gray-700">Date complétude
+                                                    <label for="fileCompletionDate" class="block text-sm font-medium text-gray-700">Date complétude
                                                         dossier</label>
-                                                    <x-date-picker
+                                                    <x-date-picker wire:model="fileCompletionDate" id="fileCompletionDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="last-name" class="block text-sm font-medium text-gray-700">Date dépôt
+                                                    <label for="filingDate" class="block text-sm font-medium text-gray-700">Date dépôt
                                                         dossier</label>
-                                                    <x-date-picker
+                                                    <x-date-picker wire:model="filingDate" id="filingDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Date de
+                                                    <label for="fileWithdrawalDate" class="block text-sm font-medium text-gray-700">Date de
                                                         retrait</label>
-                                                    <x-date-picker
+                                                    <x-date-picker wire:model="fileWithdrawalDate" id="fileWithdrawalDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Date de
+                                                    <label for="dateOfTransmissionToTheBO" class="block text-sm font-medium text-gray-700">Date de
                                                         transmission au BO Garantie</label>
-                                                    <x-date-picker
+                                                    <x-date-picker wire:model="dateOfTransmissionToTheBO" id="dateOfTransmissionToTheBO"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Montant de
+                                                    <label for="inscriptionAmount" class="block text-sm font-medium text-gray-700">Montant de
                                                         l'inscription</label>
-                                                    <input type="number" name="email-address" id="email-address" autocomplete="email"
+                                                    <input type="number" name="inscriptionAmount" id="inscriptionAmount"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                 </div>
 

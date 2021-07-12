@@ -16,27 +16,28 @@ class CreateDeedsTable extends Migration
         Schema::create('deeds', function (Blueprint $table) {
             $table->id();
             $table->string('client');
-            $table->string('notary');
+            $table->string('notary')->nullable();
             $table->string('correspondent_of_the_notary')->nullable();
             $table->string('purpose_of_the_credit');
             $table->string('reference_of_credit_decision');
-            $table->date('date_of_receipt_of_the_request');
+            $table->date('date_of_receipt_of_the_request')->nullable();
             $table->string('tax_notice_reference')->nullable();
             $table->string('debit_advice_notified', 10)->nullable();
             //writting infos
-            $table->date('writting_end_date');
-            $table->date('signature_date');
-            $table->date('writting_completion_date');
+            $table->date('writting_end_date')->nullable();
+            $table->date('signature_date')->nullable();
+            $table->date('writting_completion_date')->nullable();
+            $table->date('writting_amount')->nullable();
             //registration infos
-            $table->date('registration_sending_date');
-            $table->date('registration_return_date');
-            $table->unsignedInteger('registration_amount');
+            $table->date('registration_sending_date')->nullable();
+            $table->date('registration_return_date')->nullable();
+            $table->unsignedInteger('registration_amount')->nullable();
             //inscription infos
-            $table->date('file_completion_date');
-            $table->date('filing_date'); //date de depot du dossier
-            $table->date('file_withdrawal_date');
-            $table->date('date_of_transmission_to_the_BO');
-            $table->unsignedInteger('inscription_amount');
+            $table->date('file_completion_date')->nullable();
+            $table->date('filing_date')->nullable(); //date de depot du dossier
+            $table->date('file_withdrawal_date')->nullable();
+            $table->date('date_of_transmission_to_the_BO')->nullable();
+            $table->unsignedInteger('inscription_amount')->nullable();
             //foreign ids
             $table->foreignId('pole_id')->constrained();
             $table->foreignId('warranty_id')->constrained();
