@@ -43,6 +43,8 @@ class CreateDeedsTable extends Migration
             $table->foreignId('warranty_id')->constrained();
             $table->foreignId('agency_id')->constrained();
 
+            $table->text('documentation')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

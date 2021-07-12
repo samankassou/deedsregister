@@ -41,23 +41,28 @@ class CreateDeedForm extends Component
     public $fileWithdrawalDate;
     public $dateOfTransmissionToTheBO;
     public $inscriptionAmount;
+    public $documentation;
 
     //validation rules
     protected function rules()
     {
         return [
-            'client'         => 'required',
-            'agency'         => 'required',
-            'pole'           => 'required',
-            'warranty'       => 'required',
+            'client'                    => 'required',
+            'agency'                    => 'required',
+            'pole'                      => 'required',
+            'warranty'                  => 'required',
+            'referenceOfCreditDecision' => 'required',
+            'purposeOfTheCredit'        => 'required',
         ];
     }
 
     protected $validationAttributes = [
-        'client'   => 'Client',
-        'agency'   => 'Agence',
-        'pole'     => 'Pôle',
-        'warranty' => 'Garantie',
+        'client'                    => 'Client',
+        'agency'                    => 'Agence',
+        'pole'                      => 'Pôle',
+        'warranty'                  => 'Garantie',
+        'referenceOfCreditDecision' => 'Référence décision',
+        'purposeOfTheCredit'        => 'Objet du crédit',
     ];
 
     public function mount()
@@ -93,15 +98,16 @@ class CreateDeedForm extends Component
             'file_completion_date'           => $this->fileCompletionDate,
             'filing_date'                    => $this->filingDate,
             'file_withdrawal_date'           => $this->fileWithdrawalDate,
-            'date_of_transmission_to_the_BO' => $this->dateOfTransmissionToTheBO
+            'date_of_transmission_to_the_BO' => $this->dateOfTransmissionToTheBO,
+            'documentation'                  => $this->documentation
         ];
         $deed = Deed::create($data);
         if (!empty($this->typesOfRequest)) {
             $deed->typeOfRequests()->attach($this->typesOfRequest);
         }
         session()->flash('alert', 'success');
-        session()->flash('message', 'Post successfully updated.');
-        return redirect()->route('admin.deeds.index');
+        session()->flash('message', 'Acte ajouté avec succès.');
+        return redirect()->route('admin.deeds.show', $deed);
     }
 
     public function render()

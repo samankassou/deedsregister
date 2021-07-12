@@ -57,45 +57,33 @@
                         <label for="purposeOfTheCredit" class="block text-sm font-medium text-gray-700">Objet du crédit<sup class="text-red-500">*</sup></label>
                         <input type="text" wire:model="purposeOfTheCredit" id="purposeOfTheCredit"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            @error('purposeOfTheCredit') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                         <label for="notary" class="block text-sm font-medium text-gray-700">Notaire</label>
                         <input type="text" wire:model="notary" id="notary"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            @error('notary') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                         <label for="correspondentOfTheNotary" class="block text-sm font-medium text-gray-700">Correspondant du notaire</label>
                         <input type="text" wire:model="correspondentOfTheNotary" id="correspondentOfTheNotary"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        @error('correspondentOfTheNotary') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                         <label for="dateOfReceiptOfTheRequest" class="block text-sm font-medium text-gray-700">Date réception demande</label>
                         <x-date-picker wire:model="dateOfReceiptOfTheRequest" id="dateOfReceiptOfTheRequest"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                        @error('dateOfReceiptOfTheRequest') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
                     <div class="col-span-6 sm:col-span-3">
                         <label for="typesOfRequest" class="block text-sm font-medium text-gray-700">Type de demande<sup class="text-red-500">*</sup></label>
                         <x-choice-select wire:model="typesOfRequest" :options="$typesOfRequests" />
                         @error('typesOfRequest') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
-                    </div>
-
-                    <div class="col-span-6 sm:col-span-3">
-                        <label for="taxNoticeReference" class="block text-sm font-medium text-gray-700">Référence avis d'imposition</label>
-                        <input type="text" wire:model="taxNoticeReference" id="taxNoticeReference"
-                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                    </div>
-                    <div class="col-span-6 sm:col-span-3">
-                        <label for="debitAdviceNotified" class="block text-sm font-medium text-gray-700">Avis de débit notifié au client?</label>
-                        <select wire:model="debitAdviceNotified" id="debitAdviceNotified"
-                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            <option value=""></option>
-                            <option value="Oui">Oui</option>
-                            <option value="Non">Non</option>
-                        </select>
-                        @error('debitAdviceNotified') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
 
                     @if (collect($typesOfRequest)->contains($typesOfRequests->firstWhere('name', 'Rédaction')->id))
@@ -124,6 +112,7 @@
                                                     <label for="writtingCompletionDate" class="block text-sm font-medium text-gray-700">Date de complétude</label>
                                                     <x-date-picker wire:model="writtingCompletionDate" id="writtingCompletionDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    @error('writtingCompletionDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
@@ -131,6 +120,7 @@
                                                         rédaction</label>
                                                     <x-date-picker wire:model="writtingEndDate" id="writtingEndDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                        @error('writtingEndDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
@@ -138,6 +128,7 @@
                                                         signature</label>
                                                     <x-date-picker wire:model="signatureDate" id="signatureDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    @error('signatureDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                             </div>
@@ -174,18 +165,21 @@
                                                     <label for="registrationSendingDate" class="block text-sm font-medium text-gray-700">Date d'envoi</label>
                                                     <x-date-picker wire:model="registrationSendingDate" id="registrationSendingDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    @error('registrationSendingDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="registrationReturnDate" class="block text-sm font-medium text-gray-700">Date retour</label>
                                                     <x-date-picker wire:model="registrationReturnDate" id="registrationReturnDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    @error('registrationReturnDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="writtingAmount" class="block text-sm font-medium text-gray-700">Montant</label>
                                                     <input type="text" wire:model="writtingAmount" id="writtingAmount"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    @error('writtingAmount') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                             </div>
@@ -223,6 +217,7 @@
                                                         dossier</label>
                                                     <x-date-picker wire:model="fileCompletionDate" id="fileCompletionDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    @error('fileCompletionDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
@@ -230,6 +225,7 @@
                                                         dossier</label>
                                                     <x-date-picker wire:model="filingDate" id="filingDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    @error('filingDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
@@ -237,12 +233,14 @@
                                                         retrait</label>
                                                     <x-date-picker wire:model="fileWithdrawalDate" id="fileWithdrawalDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    @error('fileWithdrawalDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="dateOfTransmissionToTheBO" class="block text-sm font-medium text-gray-700">Date de
                                                         transmission au BO Garantie</label>
                                                     <x-date-picker wire:model="dateOfTransmissionToTheBO" id="dateOfTransmissionToTheBO"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                                                    @error('dateOfTransmissionToTheBO') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
@@ -250,6 +248,7 @@
                                                         l'inscription</label>
                                                     <input type="number" name="inscriptionAmount" id="inscriptionAmount"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    @error('inscriptionAmount') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                             </div>
@@ -259,6 +258,28 @@
                             </div>
                         </div>
                     @endif
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="taxNoticeReference" class="block text-sm font-medium text-gray-700">Référence avis d'imposition</label>
+                        <input type="text" wire:model="taxNoticeReference" id="taxNoticeReference"
+                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        @error('taxNoticeReference') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="debitAdviceNotified" class="block text-sm font-medium text-gray-700">Avis de débit notifié au
+                            client?</label>
+                        <select wire:model="debitAdviceNotified" id="debitAdviceNotified"
+                            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value=""></option>
+                            <option value="Oui">Oui</option>
+                            <option value="Non">Non</option>
+                        </select>
+                        @error('debitAdviceNotified') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="documentation" class="block text-sm font-medium text-gray-700">Documentation physique</label>
+                        <textarea wire:model="documentation" id="documentation" rows="3" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                        @error('debitAdviceNotified') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+                    </div>
                 </div>
             </div>
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
