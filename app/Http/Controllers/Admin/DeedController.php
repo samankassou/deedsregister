@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Deed;
 use App\Models\Pole;
+use App\Models\TypeOfRequest;
+use App\Models\Warranty;
 use Illuminate\Http\Request;
 
 class DeedController extends Controller

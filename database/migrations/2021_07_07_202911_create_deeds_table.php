@@ -21,6 +21,8 @@ class CreateDeedsTable extends Migration
             $table->string('purpose_of_the_credit');
             $table->string('reference_of_credit_decision');
             $table->date('date_of_receipt_of_the_request');
+            $table->string('tax_notice_reference')->nullable();
+            $table->string('debit_advice_notified', 10)->nullable();
             //writting infos
             $table->date('writting_end_date');
             $table->date('signature_date');

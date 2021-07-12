@@ -1,5 +1,6 @@
 @extends('layouts.app', ['title' => $title])
 @section('styles')
+    <link rel="stylesheet" href="{{ asset('vendor/font-awesome.min.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     @laravelViewsStyles('laravel-views')
     <script src="{{ asset('template/js/init-alpine.js') }}"></script>
@@ -239,4 +240,14 @@
 @endsection
 @section('scripts')
     @laravelViewsScripts('laravel-views')
+    <script src="{{ asset('vendor/sweetalert/sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
+    @if (session('alert'))
+        <script>
+            Toast.fire({
+                icon : "{{ session('alert') }}",
+                title: "{{ session('message') }}"
+            })
+        </script>
+    @endif
 @endsection
