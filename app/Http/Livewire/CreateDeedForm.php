@@ -19,6 +19,7 @@ class CreateDeedForm extends Component
 
     //user inputs
     public $client;
+    public $clientCode;
     public $agency;
     public $pole;
     public $warranty;
@@ -48,6 +49,7 @@ class CreateDeedForm extends Component
     {
         return [
             'client'                    => 'required',
+            'clientCode'                => 'nullable',
             'agency'                    => 'required',
             'pole'                      => 'required',
             'warranty'                  => 'required',
@@ -58,6 +60,7 @@ class CreateDeedForm extends Component
 
     protected $validationAttributes = [
         'client'                    => 'Client',
+        'clientCode'                => 'Client',
         'agency'                    => 'Agence',
         'pole'                      => 'Pôle',
         'warranty'                  => 'Garantie',
@@ -78,6 +81,7 @@ class CreateDeedForm extends Component
         $this->validate();
         $data = [
             'client'                         => $this->client,
+            'client_code'                    => $this->clientCode,
             'agency_id'                      => $this->agency,
             'pole_id'                        => $this->pole,
             'warranty_id'                    => $this->warranty,

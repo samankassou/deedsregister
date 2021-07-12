@@ -3,14 +3,32 @@
 namespace App\Http\Livewire;
 
 use App\Models\Deed;
+use App\Filters\PoleFilter;
+use App\Filters\DateOfReceipt;
+use App\Filters\WarrantyFilter;
+use LaravelViews\Facades\Header;
+use App\Actions\DeleteDeedAction;
 use LaravelViews\Views\TableView;
+use LaravelViews\Actions\RedirectAction;
+use Illuminate\Database\Eloquent\Builder;
 
 class DeedsTableView extends TableView
 {
+    public $searchBy = [
+        'client', 'notary', 'agency.name',
+        'pole.name', 'warranty.name'
+    ];
+    protected $paginate = 10;
+
     /**
-     * Sets a model class to get the initial data
+     * Sets a initial query with the data to fill the table
+     *
+     * @return Builder Eloquent query
      */
-    protected $model = Deed::class;
+    public function repository(): Builder
+    {
+        return Deed::latest()->with(['agency', 'pole', 'warranty', 'typeOfRequests']);
+    }
 
     /**
      * Sets the headers of the table as you want to be displayed
@@ -20,7 +38,11 @@ class DeedsTableView extends TableView
     public function headers(): array
     {
         return [
-            'Client',
+            Header::title('Code Client')->sortBy('client_code'),
+            Header::title('Client')->sortBy('client'),
+            Header::title('Agence'),
+            'Pôle',
+            'Garantie',
             'Décision de crédit'
         ];
     }
@@ -33,8 +55,36 @@ class DeedsTableView extends TableView
     public function row($model): array
     {
         return [
+            $model->client_code,
             $model->client,
+            $model->agency->name,
+            $model->pole->name,
+            $model->warranty->name,
             $model->reference_of_credit_decision
+        ];
+    }
+
+    protected function filters()
+    {
+        return [
+            new DateOfReceipt,
+            new PoleFilter,
+            new WarrantyFilter
+        ];
+    }
+
+    protected function actionsByRow()
+    {
+        return [
+            new RedirectAction('admin.deeds.show', 'Détail', 'eye'),
+            new DeleteDeedAction,
+        ];
+    }
+
+    protected function bulkActions()
+    {
+        return [
+            new DeleteDeedAction
         ];
     }
 }

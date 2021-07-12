@@ -16,6 +16,7 @@ class CreateDeedsTable extends Migration
         Schema::create('deeds', function (Blueprint $table) {
             $table->id();
             $table->string('client');
+            $table->string('client_code')->nullable();
             $table->string('notary')->nullable();
             $table->string('correspondent_of_the_notary')->nullable();
             $table->string('purpose_of_the_credit');

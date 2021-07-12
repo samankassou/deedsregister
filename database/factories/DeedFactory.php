@@ -26,6 +26,7 @@ class DeedFactory extends Factory
     {
         return [
             'client'                         => $this->faker->name(),
+            'client_code'                    => $this->faker->unique()->numberBetween(100, 19999),
             'notary'                         => $this->faker->name(),
             'purpose_of_the_credit'          => $this->faker->paragraph(1),
             'reference_of_credit_decision'   => $this->faker->unique()->numberBetween(1, 1000),

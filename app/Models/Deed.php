@@ -28,7 +28,8 @@ class Deed extends Model
      * @var array
      */
     protected $fillable = [
-        'client', 'notary', 'correspondent_of_the_notary', 'purpose_of_the_credit',
+        'client', 'client_code', 'notary', 'correspondent_of_the_notary',
+        'purpose_of_the_credit',
         'reference_of_credit_decision', 'date_of_receipt_of_the_request',
         'tax_notice_reference', 'debit_advice_notified', 'writting_end_date',
         'signature_date', 'writting_completion_date', 'writting_amount',
