@@ -1,25 +1,23 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Deeds;
 
 use App\Models\Deed;
-use App\Filters\PoleFilter;
-use App\Filters\DateOfReceipt;
-use App\Filters\WarrantyFilter;
 use LaravelViews\Facades\Header;
-use App\Actions\DeleteDeedAction;
 use LaravelViews\Views\TableView;
-use LaravelViews\Actions\RedirectAction;
+use LaravelViews\Actions\Confirmable;
+use App\Actions\ForceDeleteDeedAction;
+use App\Actions\RestoreDeedAction;
 use Illuminate\Database\Eloquent\Builder;
 
-class DeedsTableView extends TableView
+class DeletedDeedsTableView extends TableView
 {
+    use Confirmable;
     public $searchBy = [
         'client', 'notary', 'agency.name',
         'pole.name', 'warranty.name'
     ];
     protected $paginate = 10;
-
     /**
      * Sets a initial query with the data to fill the table
      *
@@ -27,7 +25,7 @@ class DeedsTableView extends TableView
      */
     public function repository(): Builder
     {
-        return Deed::latest()->with(['agency', 'pole', 'warranty', 'typeOfRequests']);
+        return Deed::onlyTrashed()->with(['agency', 'pole', 'warranty', 'typeOfRequests']);
     }
 
     /**
@@ -43,7 +41,7 @@ class DeedsTableView extends TableView
             Header::title('Agence'),
             'Pôle',
             'Garantie',
-            'Types de demande',
+            'Décision de crédit'
         ];
     }
 
@@ -60,32 +58,28 @@ class DeedsTableView extends TableView
             $model->agency->name,
             $model->pole->name,
             $model->warranty->name,
-            $model->typeOfRequests->implode('name', ', '),
-        ];
-    }
-
-    protected function filters()
-    {
-        return [
-            new DateOfReceipt,
-            new PoleFilter,
-            new WarrantyFilter
+            $model->reference_of_credit_decision
         ];
     }
 
     protected function actionsByRow()
     {
         return [
-            new RedirectAction('admin.deeds.show', 'Détail', 'eye'),
-            new RedirectAction('admin.deeds.edit', 'Modifier', 'edit'),
-            new DeleteDeedAction,
+            new RestoreDeedAction,
+            new ForceDeleteDeedAction,
         ];
     }
 
     protected function bulkActions()
     {
         return [
-            new DeleteDeedAction
+            new RestoreDeedAction,
+            new ForceDeleteDeedAction
         ];
+    }
+
+    public function getConfirmationMessage($item = null)
+    {
+        return 'Cette suppression est définitive, voulez-vous confirmer?';
     }
 }

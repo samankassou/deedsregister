@@ -59,4 +59,14 @@ class DeedController extends Controller
     {
         return view('admin.deeds.deleted.index');
     }
+
+    /**
+     * Print the deed to pdf.
+     *
+     * @param  \App\Models\Deed  $deed
+     */
+    public function print(Deed $deed)
+    {
+        //return view('admin.deeds.deleted.index');
+    }
 }

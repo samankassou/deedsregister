@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Deeds;
 
 use App\Models\Agency;
 use App\Models\Deed;

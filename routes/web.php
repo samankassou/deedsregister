@@ -27,7 +27,9 @@ Route::group(
     ],
     function () {
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
         //deeds routes
+        Route::get('deeds/{deed}/print', [DeedController::class, 'print'])->name('deeds.print');
         Route::get('deeds/deleted', [DeedController::class, 'deleted'])->name('deeds.deleted');
         Route::resource('deeds', DeedController::class);
         Route::resource('users', UserController::class);
