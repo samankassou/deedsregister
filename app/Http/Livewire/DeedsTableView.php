@@ -44,7 +44,6 @@ class DeedsTableView extends TableView
             'Pôle',
             'Garantie',
             'Types de demande',
-            'Décision de crédit'
         ];
     }
 
@@ -62,7 +61,6 @@ class DeedsTableView extends TableView
             $model->pole->name,
             $model->warranty->name,
             $model->typeOfRequests->implode('name', ', '),
-            $model->reference_of_credit_decision
         ];
     }
 
@@ -79,6 +77,7 @@ class DeedsTableView extends TableView
     {
         return [
             new RedirectAction('admin.deeds.show', 'Détail', 'eye'),
+            new RedirectAction('admin.deeds.edit', 'Modifier', 'edit'),
             new DeleteDeedAction,
         ];
     }

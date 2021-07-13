@@ -4,9 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Deed;
-use App\Models\Pole;
-use App\Models\TypeOfRequest;
-use App\Models\Warranty;
 use Illuminate\Http\Request;
 
 class DeedController extends Controller
@@ -50,7 +47,7 @@ class DeedController extends Controller
      */
     public function edit(Deed $deed)
     {
-        //
+        return view('admin.deeds.edit', compact('deed'));
     }
 
     /**
