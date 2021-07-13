@@ -40,6 +40,7 @@ class ForceDeleteDeedAction extends Action
             $arg->typeOfRequests()->detach();
             $arg->forceDelete();
         }
+        $this->view->emit('deedForceDeleted');
         $this->success("Acte(s) supprimé(s)!");
     }
 

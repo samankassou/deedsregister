@@ -109,6 +109,7 @@ class CreateDeedForm extends Component
         if (!empty($this->typesOfRequest)) {
             $deed->typeOfRequests()->attach($this->typesOfRequest);
         }
+        $this->emit('deedAdded');
         session()->flash('alert', 'success');
         session()->flash('message', 'Acte ajouté avec succès.');
         return redirect()->route('admin.deeds.show', $deed);

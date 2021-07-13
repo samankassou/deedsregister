@@ -51,29 +51,6 @@ class DeedController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Deed  $deed
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Deed $deed)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Deed  $deed
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Deed $deed)
-    {
-        //
-    }
-
-    /**
      * List deleted resources.
      *
      * @return \Illuminate\Http\Response

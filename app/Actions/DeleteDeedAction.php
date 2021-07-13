@@ -35,6 +35,7 @@ class DeleteDeedAction extends Action
         } else {
             $model->delete();
         }
+        $this->view->emit('deedDeleted');
         // Your code here
         $this->success("Acte(s) supprimé(s)!");
     }

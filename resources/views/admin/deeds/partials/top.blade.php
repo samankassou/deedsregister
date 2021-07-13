@@ -4,13 +4,7 @@
             href="{{ url()->previous() }}">Retour</a>
     </div>
     <div class="flex gap-2">
-        <a href="{{ route('admin.deeds.index') }}"
-            class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-            Liste des actes({{ $deedsCount }})
-        </a>
-        <a href="{{ route('admin.deeds.deleted') }}"
-            class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-            Corbeille({{ $deletedDeedsCount }})
-        </a>
+        @livewire('total-deed-count')
+        @livewire('total-deleted-deeds-count')
     </div>
 </div>

@@ -33,6 +33,7 @@ class RestoreDeedAction extends Action
         } else {
             $arg->restore();
         }
+        $this->view->emit('deedRestored');
         $this->success("Acte(s) restauré(s)");
     }
 }
