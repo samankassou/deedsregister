@@ -28,11 +28,18 @@ class ForceDeleteDeedAction extends Action
      * @param $model Model object of the list where the user has clicked
      * @param $view Current view where the action was executed from
      */
-    public function handle(Deed $deed, View $view)
+    public function handle($arg, View $view)
     {
-        $deed->typeOfRequests()->detach();
-        $deed->forceDelete();
-        // Your code here
+        if (is_array($arg)) {
+            $deeds = Deed::onlyTrashed()->whereIn('id', $arg);
+            $deeds->each(function ($deed) {
+                $deed->typeOfRequests()->detach();
+            });
+            $deeds->forceDelete();
+        } else {
+            $arg->typeOfRequests()->detach();
+            $arg->forceDelete();
+        }
         $this->success("Acte(s) supprimé(s)!");
     }
 

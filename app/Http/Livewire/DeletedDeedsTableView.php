@@ -7,6 +7,7 @@ use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
 use LaravelViews\Actions\Confirmable;
 use App\Actions\ForceDeleteDeedAction;
+use App\Actions\RestoreDeedAction;
 use Illuminate\Database\Eloquent\Builder;
 
 class DeletedDeedsTableView extends TableView
@@ -64,6 +65,7 @@ class DeletedDeedsTableView extends TableView
     protected function actionsByRow()
     {
         return [
+            new RestoreDeedAction,
             new ForceDeleteDeedAction,
         ];
     }
@@ -71,6 +73,7 @@ class DeletedDeedsTableView extends TableView
     protected function bulkActions()
     {
         return [
+            new RestoreDeedAction,
             new ForceDeleteDeedAction
         ];
     }
