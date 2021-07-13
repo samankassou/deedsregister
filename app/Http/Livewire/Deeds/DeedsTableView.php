@@ -8,6 +8,7 @@ use App\Filters\DateOfReceipt;
 use App\Filters\WarrantyFilter;
 use LaravelViews\Facades\Header;
 use App\Actions\DeleteDeedAction;
+use App\Filters\TypesOfRequestsFilter;
 use LaravelViews\Views\TableView;
 use LaravelViews\Actions\RedirectAction;
 use Illuminate\Database\Eloquent\Builder;
@@ -69,6 +70,7 @@ class DeedsTableView extends TableView
         return [
             new DateOfReceipt,
             new PoleFilter,
+            new TypesOfRequestsFilter,
             new WarrantyFilter
         ];
     }

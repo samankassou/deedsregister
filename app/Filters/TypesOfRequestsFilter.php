@@ -2,11 +2,13 @@
 
 namespace App\Filters;
 
+use App\Models\TypeOfRequest;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Filters\Filter;
 
 class TypesOfRequestsFilter extends Filter
 {
+    public $title = "Types de demande";
     /**
      * Modify the current query when the filter is used
      *
@@ -16,7 +18,9 @@ class TypesOfRequestsFilter extends Filter
      */
     public function apply(Builder $query, $value, $request): Builder
     {
-        return $query->where('', $value);
+        return $query->whereHas('typeOfRequests', function ($query) use ($value) {
+            $query->where('name', 'LIKE', '%' . $value . '%');
+        });
     }
 
     /**
@@ -24,8 +28,18 @@ class TypesOfRequestsFilter extends Filter
      *
      * @return Array associative array with the title and values
      */
-    public function options(): Array
+    public function options(): array
     {
-        return [];
+        return $this->getFormattedOptions();
+    }
+
+    protected function getFormattedOptions(): array
+    {
+        $typesOfRequests = TypeOfRequest::all();
+        $arr = [];
+        foreach ($typesOfRequests as $type) {
+            $arr[$type->name] = $type->name;
+        }
+        return $arr;
     }
 }
