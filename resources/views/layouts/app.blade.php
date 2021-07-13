@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $title ?? "Iconnu" }} | {{ config('app.name') }}</title>
+    <title>{{ $title ?? "Inconnu" }} | {{ config('app.name') }}</title>
     <link rel="icon" href="{{ asset('favicon.jpeg') }}" type="image/jpeg" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles

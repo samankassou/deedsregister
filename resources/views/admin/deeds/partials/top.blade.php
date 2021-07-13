@@ -4,7 +4,7 @@
             href="{{ url()->previous() }}">Retour</a>
     </div>
     <div class="flex gap-2">
-        @livewire('total-deed-count')
-        @livewire('total-deleted-deeds-count')
+        @livewire('deeds.total-deed-count')
+        @livewire('deeds.total-deleted-deeds-count')
     </div>
 </div>
