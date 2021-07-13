@@ -3,11 +3,20 @@
 namespace App\Http\Livewire;
 
 use App\Models\Deed;
+use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
+use LaravelViews\Actions\Confirmable;
+use App\Actions\ForceDeleteDeedAction;
 use Illuminate\Database\Eloquent\Builder;
 
 class DeletedDeedsTableView extends TableView
 {
+    use Confirmable;
+    public $searchBy = [
+        'client', 'notary', 'agency.name',
+        'pole.name', 'warranty.name'
+    ];
+    protected $paginate = 10;
     /**
      * Sets a initial query with the data to fill the table
      *
@@ -15,7 +24,7 @@ class DeletedDeedsTableView extends TableView
      */
     public function repository(): Builder
     {
-        return Deed::onlyTrashed();
+        return Deed::onlyTrashed()->with(['agency', 'pole', 'warranty', 'typeOfRequests']);
     }
 
     /**
@@ -26,7 +35,11 @@ class DeletedDeedsTableView extends TableView
     public function headers(): array
     {
         return [
-            'Client',
+            Header::title('Code Client')->sortBy('client_code'),
+            Header::title('Client')->sortBy('client'),
+            Header::title('Agence'),
+            'Pôle',
+            'Garantie',
             'Décision de crédit'
         ];
     }
@@ -39,8 +52,31 @@ class DeletedDeedsTableView extends TableView
     public function row($model): array
     {
         return [
+            $model->client_code,
             $model->client,
+            $model->agency->name,
+            $model->pole->name,
+            $model->warranty->name,
             $model->reference_of_credit_decision
         ];
+    }
+
+    protected function actionsByRow()
+    {
+        return [
+            new ForceDeleteDeedAction,
+        ];
+    }
+
+    protected function bulkActions()
+    {
+        return [
+            new ForceDeleteDeedAction
+        ];
+    }
+
+    public function getConfirmationMessage($item = null)
+    {
+        return 'Cette suppression est définitive, voulez-vous confirmer?';
     }
 }

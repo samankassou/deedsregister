@@ -43,6 +43,7 @@ class DeedsTableView extends TableView
             Header::title('Agence'),
             'Pôle',
             'Garantie',
+            'Types de demande',
             'Décision de crédit'
         ];
     }
@@ -60,6 +61,7 @@ class DeedsTableView extends TableView
             $model->agency->name,
             $model->pole->name,
             $model->warranty->name,
+            $model->typeOfRequests->implode('name', ', '),
             $model->reference_of_credit_decision
         ];
     }

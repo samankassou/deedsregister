@@ -5,11 +5,9 @@ namespace App\Actions;
 use App\Models\Deed;
 use LaravelViews\Views\View;
 use LaravelViews\Actions\Action;
-use LaravelViews\Actions\Confirmable;
 
-class DeleteDeedAction extends Action
+class ForceDeleteDeedAction extends Action
 {
-    use Confirmable;
     /**
      * Any title you want to be displayed
      * @var String
@@ -28,19 +26,14 @@ class DeleteDeedAction extends Action
      * @param $model Model object of the list where the user has clicked
      * @param $view Current view where the action was executed from
      */
-    public function handle($model, View $view)
+    public function handle($ids, View $view)
     {
-        if (is_array($model)) {
-            Deed::destroy($model);
+        if (is_array($ids)) {
+            Deed::onlyTrashed()->whereIn('id', $ids)->delete();
         } else {
-            $model->delete();
+            Deed::onlyTrashed()->where('id', $ids)->delete();
         }
         // Your code here
         $this->success("Acte(s) supprimé(s)!");
-    }
-
-    public function getConfirmationMessage($item = null)
-    {
-        return 'Etes-vous sûr de vouloir supprimer?';
     }
 }

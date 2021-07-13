@@ -11,7 +11,8 @@
         Corbeille({{ $deletedDeedsCount }})
     </a>
 </div>
-    <div class="w-full border rounded-lg shadow-xs">
+    <div class="w-full border overflow-x-scroll rounded-lg shadow-xs">
+        <h3 class="text-xl text-center text-indigo-600 font-bold md:ml-3 md:mt-3 md:text-left">Liste des actes</h3>
         @livewire('deeds-table-view')
     </div>
 @endsection
