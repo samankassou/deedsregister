@@ -12,7 +12,7 @@
       <div x-text='message' class="text-gray-900 text-lg font-medium" ></div>
       <div class="mt-4 flex flex-col space-y-2 sm:space-y-0 sm:space-x-2 sm:flex-row sm:items-center">
         <x-lv-button @click="open = false" variant="white" wire:loading.attr="disabled">
-          {{__("Anuler")}}
+          {{__("Annuler")}}
         </x-lv-button>
         <x-lv-button variant="danger" @click="await $wire.call('confirmAndExecuteAction', action, id, false); open = false" wire:loading.attr="disabled">
           {{ __("Oui, supprimer") }}

@@ -8,7 +8,7 @@
 @section('content')
 @include('admin.deeds.partials.top')
 <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-    @livewire('edit-deed-form', compact('deed'))
+    @livewire('deeds.edit-deed-form', compact('deed'))
 </div>
 @endsection
 @section('scripts')

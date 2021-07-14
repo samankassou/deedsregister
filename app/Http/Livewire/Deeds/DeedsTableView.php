@@ -21,6 +21,8 @@ class DeedsTableView extends TableView
     ];
     protected $paginate = 10;
 
+    protected $listeners = ['export', 'paginate'];
+
     /**
      * Sets a initial query with the data to fill the table
      *
@@ -90,5 +92,17 @@ class DeedsTableView extends TableView
         return [
             new DeleteDeedAction
         ];
+    }
+
+    public function export()
+    {
+        dd($this->getRenderData());
+        $data = $this->getRenderData()['items']->items();
+        dd(collect($data));
+    }
+
+    public function paginate($value)
+    {
+        $this->paginate = (int)$value;
     }
 }

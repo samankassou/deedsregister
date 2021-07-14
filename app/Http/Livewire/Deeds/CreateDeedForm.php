@@ -55,6 +55,18 @@ class CreateDeedForm extends Component
             'warranty'                  => 'required',
             'referenceOfCreditDecision' => 'required',
             'purposeOfTheCredit'        => 'required',
+            'writtingAmount'            => 'nullable|integer',
+            'inscriptionAmount'         => 'nullable|integer',
+            'dateOfReceiptOfTheRequest' => 'nullable|date',
+            'writtingCompletionDate'    => 'nullable|date',
+            'writtingEndDate'           => 'nullable|date',
+            'signatureDate'             => 'nullable|date',
+            'registrationSendingDate'   => 'nullable|date',
+            'registrationReturnDate'    => 'nullable|date',
+            'fileCompletionDate'        => 'nullable|date',
+            'filingDate'                => 'nullable|date',
+            'fileWithdrawalDate'        => 'nullable|date',
+            'dateOfTransmissionToTheBO' => 'nullable|date',
         ];
     }
 
@@ -106,9 +118,9 @@ class CreateDeedForm extends Component
             'documentation'                  => $this->documentation
         ];
         $deed = Deed::create($data);
-        if (!empty($this->typesOfRequest)) {
-            $deed->typeOfRequests()->attach($this->typesOfRequest);
-        }
+
+        $deed->typeOfRequests()->attach($this->typesOfRequest);
+
         session()->flash('alert', 'success');
         session()->flash('message', 'Acte ajouté avec succès.');
         return redirect()->route('admin.deeds.show', $deed);

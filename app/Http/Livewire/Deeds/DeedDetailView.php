@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Deeds;
 
 use App\Models\Deed;
-use App\Actions\DeleteDeedAction;
 use LaravelViews\Views\DetailView;
 use LaravelViews\Actions\RedirectAction;
 
@@ -39,7 +38,6 @@ class DeedDetailView extends DetailView
     {
         return [
             new RedirectAction('admin.deeds.edit', 'Modifier', 'edit'),
-            new DeleteDeedAction,
         ];
     }
 }
