@@ -15,7 +15,8 @@ class CreateAgenciesTable extends Migration
     {
         Schema::create('agencies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('code')->unique();
+            $table->string('name')->unique();
         });
     }
 

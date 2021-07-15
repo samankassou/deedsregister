@@ -22,6 +22,7 @@ class AgencyFactory extends Factory
     public function definition()
     {
         return [
+            'code' => $this->faker->unique()->numberBetween(100, 1000),
             'name' => $this->faker->city()
         ];
     }

@@ -4,16 +4,15 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Agency as Model;
+use App\Models\Warranty as Model;
 
 
-class Agency extends Component
+class Warranty extends Component
 {
     use WithPagination;
 
     public $paginate = 10;
 
-    public $code;
     public $name;
 
 
@@ -27,22 +26,10 @@ class Agency extends Component
 
     public $showConfirmDeletePopup = false;
 
+    protected $rules = [
+        'name' => 'required',
 
-    protected function rules()
-    {
-        if ($this->mode == "create") {
-            return [
-                'code' => 'required|unique:agencies',
-                'name' => 'required|unique:agencies',
-
-            ];
-        }
-        return [
-            'code' => 'required|unique:agencies,code,' . $this->primaryId,
-            'name' => 'required|unique:agencies,name,' . $this->primaryId,
-
-        ];
-    }
+    ];
 
 
 
@@ -58,10 +45,8 @@ class Agency extends Component
 
     public function render()
     {
-        $model = Model::where('code', 'like', '%' . $this->search . '%')
-            ->orWhere('name', 'like', '%' . $this->search . '%')
-            ->paginate($this->paginate);
-        return view('livewire.agency', [
+        $model = Model::where('name', 'like', '%' . $this->search . '%')->paginate($this->paginate);
+        return view('livewire.warranty', [
             'rows' => $model
         ]);
     }
@@ -80,7 +65,6 @@ class Agency extends Component
         $this->primaryId = $primaryId;
         $model = Model::find($primaryId);
 
-        $this->code = $model->code;
         $this->name = $model->name;
 
 
@@ -99,12 +83,11 @@ class Agency extends Component
 
         $model = new Model();
 
-        $model->code = $this->code;
         $model->name = $this->name;
         $model->save();
 
         $this->resetForm();
-        session()->flash('message', 'Agence créée avec succès');
+        session()->flash('message', 'Record Saved Successfully');
         $this->showForm = false;
     }
 
@@ -120,13 +103,12 @@ class Agency extends Component
 
         $model = Model::find($this->primaryId);
 
-        $model->code = $this->code;
         $model->name = $this->name;
         $model->save();
 
         $this->resetForm();
 
-        session()->flash('message', 'Agence modifiée avec succès');
+        session()->flash('message', 'Record Updated Successfully');
     }
 
     public function confirmDelete($primaryId)
@@ -139,7 +121,7 @@ class Agency extends Component
     {
         Model::find($this->primaryId)->delete();
         $this->showConfirmDeletePopup = false;
-        session()->flash('message', 'Agence supprimée avec succès');
+        session()->flash('message', 'Record Deleted Successfully');
     }
 
     public function clearFlash()

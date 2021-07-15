@@ -75,6 +75,19 @@
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
+                    @if (request()->routeIs('admin.warranties.*'))
+                    <x-active-menu />
+                    @endif
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 {{ request()->routeIs('admin.warranties.*') ? 'text-gray-800' : '' }} hover:text-gray-800 dark:hover:text-gray-200"
+                        href="{{ route('admin.warranties.index') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        <span class="ml-4">Garanties</span>
+                    </a>
+                </li>
+                <li class="relative px-6 py-3">
                     <button
                         class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                         @click="togglePagesMenu" aria-haspopup="true">

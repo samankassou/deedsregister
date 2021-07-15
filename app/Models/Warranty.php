@@ -10,5 +10,7 @@ class Warranty extends Model
 {
     use HasFactory, HasRandomId;
 
+    protected $fillable = ['name'];
+
     public $timestamps = false;
 }

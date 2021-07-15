@@ -34,5 +34,6 @@ Route::group(
         Route::resource('deeds', DeedController::class);
         Route::get('users', [UserController::class, 'index'])->name('users.index');
         Route::view('agencies', 'admin.agencies.index')->name('agencies.index');
+        Route::view('warranties', 'admin.warranties.index')->name('warranties.index');
     }
 );

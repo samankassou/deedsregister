@@ -12,5 +12,5 @@ class Agency extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['code', 'name'];
 }
