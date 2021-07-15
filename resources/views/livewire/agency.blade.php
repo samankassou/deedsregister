@@ -2,8 +2,10 @@
     @if (session()->has('message'))
         <div class="flex mx-auto w-1/4 sm:w-full md:w-full">
             <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500 mx-auto">
-            <span class="inline-block align-middle mr-8">
-                <b class="capitalize">Success!</b> {{ session('message') }}
+            <span class="flex items-center align-middle mr-8">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>{{ session('message') }}
               </span>
                 <button wire:click="clearFlash()"
                     class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
@@ -18,7 +20,7 @@
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden  sm:rounded-lg p-2 flex flex-row justify-between">
                         <div class="w-1/4">
-                            <input wire:model="search" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-1/2" id="search" type="text" name="search" wire:model="search" required="required" autofocus="autofocus">
+                            <input wire:model="search" placeholder="Rechercher..." class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-1/2" id="search" type="text" name="search" wire:model="search" required="required" autofocus="autofocus">
                         </div>
                         <div>
                             <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" wire:click="create">
@@ -96,11 +98,6 @@
                         <div class="flex flex-row justify-start p-2 bg-gray-100">
                             <div
                                 class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full {{ $mode == 'create' ? 'bg-green-100' : 'bg-blue-100' }} sm:mx-0 sm:h-10 sm:w-10">
-                                @if($mode == 'create')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                                    </svg>
-                                @endif
                             </div>
                             <h3 class="text-lg leading-6 font-medium text-gray-900 ml-4 p-2" id="modal-title">
                                 {{ $mode == 'create' ? 'Créer une agence' : 'Modifier ' }}
@@ -119,14 +116,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <div class="gap-2 bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                             <button @if($mode == 'create') wire:click="store()" @else wire:click="update()" @endif type="button"
-                                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                    class="inline-flex justify-center px-3 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                                 {{ $mode == 'create' ? 'Enregistrer' : 'Modifier' }}
                             </button>
                             <button wire:click="$set('showForm', false)" type="button"
                                     class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                                Cancel
+                                Annuler
                             </button>
                         </div>
                     </div>

@@ -60,9 +60,9 @@ class DeedsTableView extends TableView
         return [
             $model->client_code,
             $model->client,
-            $model->agency->name,
-            $model->pole->name,
-            $model->warranty->name,
+            optional($model->agency)->name,
+            optional($model->pole)->name,
+            optional($model->warranty)->name,
             $model->typeOfRequests->implode('name', ', '),
         ];
     }

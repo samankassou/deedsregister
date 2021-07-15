@@ -40,9 +40,9 @@ class CreateDeedsTable extends Migration
             $table->date('date_of_transmission_to_the_BO')->nullable();
             $table->unsignedInteger('inscription_amount')->nullable();
             //foreign ids
-            $table->foreignId('pole_id')->constrained();
-            $table->foreignId('warranty_id')->constrained();
-            $table->foreignId('agency_id')->constrained();
+            $table->foreignId('pole_id');
+            $table->foreignId('warranty_id');
+            $table->foreignId('agency_id');
 
             $table->text('documentation')->nullable();
 
