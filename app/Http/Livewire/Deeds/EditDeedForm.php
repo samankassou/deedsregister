@@ -16,6 +16,7 @@ class EditDeedForm extends Component
     public $warranties;
     public $agencies;
     public $typesOfRequests;
+    public $typesOfRequest;
 
     //user inputs
     public $client;
@@ -23,7 +24,7 @@ class EditDeedForm extends Component
     public $agency;
     public $pole;
     public $warranty;
-    public $typesOfRequest = [];
+    public $selectedTypesOfRequest = [];
     public $dateOfReceiptOfTheRequest;
     public $notary;
     public $correspondentOfTheNotary;
@@ -64,7 +65,9 @@ class EditDeedForm extends Component
         $this->writtingCompletionDate = optional($deed->writting_completion_date)->format('d/m/Y');
         $this->writtingEndDate = optional($deed->writting_end_date)->format('d/m/Y');
         $this->signatureDate = optional($deed->signature_date)->format('d/m/Y');
-        $this->typesOfRequest = [1, 2, 3];
+        $this->typesOfRequest = $deed->typeOfRequests;
+        //$this->typesOfRequest = $deed->typeOfRequests->pluck('id');
+        //dd($deed->typeOfRequests->pluck('id')->toArray());
     }
 
     public function render()

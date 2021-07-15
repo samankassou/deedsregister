@@ -103,7 +103,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="typesOfRequest" class="block text-sm font-medium text-gray-700">Type de demande<sup
                                 class="text-red-500">*</sup></label>
-                        <x-choice-select wire:model="typesOfRequest" :options="$typesOfRequests"/>
+                        <x-choice-select wire:model="SelectedTypesOfRequest" :options="$typesOfRequests" :initials="$typesOfRequest" />
                         @error('typesOfRequest') <span class="text-red-500 text-xs italic">{{ $message }}</span>
                         @enderror
                     </div>

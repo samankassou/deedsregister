@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Deed;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
 
 class DeedController extends Controller
 {
@@ -67,6 +69,9 @@ class DeedController extends Controller
      */
     public function print(Deed $deed)
     {
-        //return view('admin.deeds.deleted.index');
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('admin.deeds.pdfs.show', compact('deed'));
+        return $pdf->stream();
     }
 }

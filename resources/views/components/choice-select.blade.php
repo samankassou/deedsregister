@@ -10,7 +10,13 @@
 
         for (const [value, label] of Object.entries(values)) {
             choices.setChoiceByValue(value || label)
+            console.log(value, label)
         }
+
+        values = []
+            Array.from($refs.multiple.initials).forEach(function (option) {
+            values.push(option.value || option.text)
+        })
 
         $refs.multiple.addEventListener('change', function (event) {
             values = []

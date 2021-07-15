@@ -11,4 +11,6 @@ class Agency extends Model
     use HasFactory, HasRandomId;
 
     public $timestamps = false;
+
+    protected $fillable = ['name'];
 }
