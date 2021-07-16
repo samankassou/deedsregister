@@ -23,7 +23,7 @@
             </a>
         </div>
         <div class="flex items-center">
-            <select class="m-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md" onchange="Livewire.emit('paginate', this.value)">
+            <select class="ml-3 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md" onchange="Livewire.emit('paginate', this.value)">
                 <option value="5">5</option>
                 <option value="10" selected>10</option>
                 <option value="20">20</option>

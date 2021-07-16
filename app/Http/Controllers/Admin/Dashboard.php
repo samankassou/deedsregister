@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Deed;
+use App\Models\User;
+use App\Models\Agency;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class Dashboard extends Controller
 {
@@ -15,6 +18,13 @@ class Dashboard extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('admin.dashboard');
+        $data['total_clients'] = Deed::select(['client_code'])->distinct()->count();
+        $data['total_users'] = User::count();
+        $data['total_agencies'] = Agency::count();
+        $data['total_writtings'] = Deed::select(['client_code'])
+            ->distinct()
+            ->count();
+        $data['total_deeds'] = Deed::count();
+        return view('admin.dashboard', $data);
     }
 }

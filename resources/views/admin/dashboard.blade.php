@@ -16,7 +16,7 @@
                     Total clients
                 </p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                    6389
+                    {{ $total_clients }}
                 </p>
             </div>
         </div>
@@ -31,10 +31,10 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Account balance
+                    Total actes
                 </p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                    $ 46,760.89
+                    {{ $total_deeds }}
                 </p>
             </div>
         </div>
@@ -49,10 +49,10 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    New sales
+                    Agences
                 </p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                    376
+                    {{ $total_agencies }}
                 </p>
             </div>
         </div>
@@ -67,10 +67,10 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Pending contacts
+                    Utilisateurs
                 </p>
                 <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                    35<i class="fa fa-car"></i>
+                    {{ $total_users }}
                 </p>
             </div>
         </div>

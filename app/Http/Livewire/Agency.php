@@ -110,6 +110,7 @@ class Agency extends Component
 
     public function resetForm()
     {
+        $this->code = "";
         $this->name = "";
     }
 
@@ -125,6 +126,7 @@ class Agency extends Component
         $model->save();
 
         $this->resetForm();
+        $this->closeForm();
 
         session()->flash('message', 'Agence modifiée avec succès');
     }

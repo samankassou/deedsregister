@@ -15,7 +15,6 @@ class User extends Component
 
     public $name;
     public $email;
-    public $password;
 
 
     public $mode = 'create';
@@ -28,12 +27,21 @@ class User extends Component
 
     public $showConfirmDeletePopup = false;
 
-    protected $rules = [
-        'name' => 'required',
-        'email' => 'required',
-        'password' => 'required',
+    protected function rules()
+    {
+        if ($this->mode == "create") {
+            return [
+                'name' => 'required',
+                'email' => 'required|email|unique:users',
 
-    ];
+            ];
+        }
+        return [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $this->primaryId,
+
+        ];
+    }
 
 
 
@@ -49,7 +57,7 @@ class User extends Component
 
     public function render()
     {
-        $model = Model::where('name', 'like', '%' . $this->search . '%')->orWhere('email', 'like', '%' . $this->search . '%')->orWhere('password', 'like', '%' . $this->search . '%')->latest()->paginate($this->paginate);
+        $model = Model::where('name', 'like', '%' . $this->search . '%')->orWhere('email', 'like', '%' . $this->search . '%')->latest()->paginate($this->paginate);
         return view('livewire.user', [
             'rows' => $model
         ]);
@@ -71,8 +79,6 @@ class User extends Component
 
         $this->name = $model->name;
         $this->email = $model->email;
-        $this->password = $model->password;
-
 
 
         $this->showForm = true;
@@ -91,11 +97,11 @@ class User extends Component
 
         $model->name = $this->name;
         $model->email = $this->email;
-        $model->password = $this->password;
+        $model->password = bcrypt("scb123");
         $model->save();
 
         $this->resetForm();
-        session()->flash('message', 'Record Saved Successfully');
+        session()->flash('message', 'Utilisateur créé avec succès');
         $this->showForm = false;
     }
 
@@ -103,7 +109,6 @@ class User extends Component
     {
         $this->name = "";
         $this->email = "";
-        $this->password = "";
     }
 
 
@@ -115,12 +120,12 @@ class User extends Component
 
         $model->name = $this->name;
         $model->email = $this->email;
-        $model->password = $this->password;
         $model->save();
 
+        $this->closeForm();
         $this->resetForm();
 
-        session()->flash('message', 'Record Updated Successfully');
+        session()->flash('message', 'Utilisateur modifié avec succès');
     }
 
     public function confirmDelete($primaryId)

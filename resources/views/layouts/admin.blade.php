@@ -46,18 +46,18 @@
                         <span class="ml-4">Actes</span>
                     </a>
                 </li>
+
                 <li class="relative px-6 py-3">
-                    @if (request()->routeIs('admin.users.*'))
+                    @if (request()->routeIs('admin.warranties.*'))
                     <x-active-menu />
                     @endif
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 {{ request()->routeIs('admin.users.*') ? 'text-gray-800' : '' }} hover:text-gray-800 dark:hover:text-gray-200"
-                        href="{{ route('admin.users.index') }}">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                            </path>
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 {{ request()->routeIs('admin.warranties.*') ? 'text-gray-800' : '' }} hover:text-gray-800 dark:hover:text-gray-200"
+                        href="{{ route('admin.warranties.index') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
                         </svg>
-                        <span class="ml-4">Utilisateurs</span>
+                        <span class="ml-4">Garanties</span>
                     </a>
                 </li>
 
@@ -74,54 +74,20 @@
                         <span class="ml-4">Agences</span>
                     </a>
                 </li>
+
                 <li class="relative px-6 py-3">
-                    @if (request()->routeIs('admin.warranties.*'))
+                    @if (request()->routeIs('admin.users.*'))
                     <x-active-menu />
                     @endif
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 {{ request()->routeIs('admin.warranties.*') ? 'text-gray-800' : '' }} hover:text-gray-800 dark:hover:text-gray-200"
-                        href="{{ route('admin.warranties.index') }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 {{ request()->routeIs('admin.users.*') ? 'text-gray-800' : '' }} hover:text-gray-800 dark:hover:text-gray-200"
+                        href="{{ route('admin.users.index') }}">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
+                            </path>
                         </svg>
-                        <span class="ml-4">Garanties</span>
+                        <span class="ml-4">Utilisateurs</span>
                     </a>
-                </li>
-                <li class="relative px-6 py-3">
-                    <button
-                        class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                        @click="togglePagesMenu" aria-haspopup="true">
-                        <span class="inline-flex items-center">
-                            <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                                <path
-                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
-                                </path>
-                            </svg>
-                            <span class="ml-4">Actes</span>
-                        </span>
-                        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                    <template x-if="isPagesMenuOpen">
-                        <ul x-transition:enter="transition-all ease-in-out duration-300" x-transition:enter-start="opacity-25 max-h-0"
-                            x-transition:enter-end="opacity-100 max-h-xl" x-transition:leave="transition-all ease-in-out duration-300"
-                            x-transition:leave-start="opacity-100 max-h-xl" x-transition:leave-end="opacity-0 max-h-0"
-                            class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
-                            aria-label="submenu">
-                            <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                                <a class="w-full" href="{{ route('admin.deeds.index') }}">Actes enregistrés</a>
-                            </li>
-                            <li class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                                <a class="w-full" href="p#">
-                                    Actes supprimés
-                                </a>
-                            </li>
-                        </ul>
-                    </template>
                 </li>
             </ul>
 

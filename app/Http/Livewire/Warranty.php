@@ -107,6 +107,7 @@ class Warranty extends Component
         $model->save();
 
         $this->resetForm();
+        $this->closeForm();
 
         session()->flash('message', 'Record Updated Successfully');
     }
