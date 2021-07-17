@@ -3,13 +3,15 @@
 namespace App\Http\Livewire\Deeds;
 
 use App\Models\Deed;
+use App\Exports\DeedExport;
 use App\Filters\PoleFilter;
 use App\Filters\DateOfReceipt;
 use App\Filters\WarrantyFilter;
 use LaravelViews\Facades\Header;
 use App\Actions\DeleteDeedAction;
-use App\Filters\TypesOfRequestsFilter;
 use LaravelViews\Views\TableView;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Filters\TypesOfRequestsFilter;
 use LaravelViews\Actions\RedirectAction;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -96,9 +98,10 @@ class DeedsTableView extends TableView
 
     public function export()
     {
-        dd($this->getRenderData());
-        $data = $this->getRenderData()['items']->items();
-        dd(collect($data));
+        $data = $this->query->items();
+        $fileName = 'liste_des_actes_' . today()->format('d-m-Y') . '.xlsx';
+        return Excel::download(new DeedExport(collect($data)), $fileName);
+        //dd($data);
     }
 
     public function paginate($value)

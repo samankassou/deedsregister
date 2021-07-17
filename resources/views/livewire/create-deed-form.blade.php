@@ -287,6 +287,29 @@
                         <textarea wire:model="documentation" id="documentation" rows="3" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
                         @error('debitAdviceNotified') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="documentation" class="block text-sm font-medium text-gray-700">Bordereau de transmission validé par le BO Garanties</label>
+                        <div class="bg-white>
+                            <div class="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
+                                <div class="md:flex">
+                                    <div class="w-full">
+                                        <div class="relative border-dotted h-28 rounded-lg border border-blue-700 bg-gray-50 flex justify-center items-center">
+                                            <div class="absolute">
+                                                <div class="flex flex-col items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <input wire:model="transmissionSlip" type="file" class="h-full w-full cursor-pointer opacity-0" multiple>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @error('transmissionSlip.*') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+                    </div>
                 </div>
             </div>
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">

@@ -104,6 +104,7 @@ class Agency extends Component
         $model->save();
 
         $this->resetForm();
+        session()->flash('alert', 'success');
         session()->flash('message', 'Agence créée avec succès');
         $this->showForm = false;
     }
@@ -128,7 +129,8 @@ class Agency extends Component
         $this->resetForm();
         $this->closeForm();
 
-        session()->flash('message', 'Agence modifiée avec succès');
+        session()->flash('alert', 'success');
+        session()->flash('message', 'Acte ajouté avec succès.');
     }
 
     public function confirmDelete($primaryId)
@@ -141,6 +143,7 @@ class Agency extends Component
     {
         Model::find($this->primaryId)->delete();
         $this->showConfirmDeletePopup = false;
+        session()->flash('alert', 'success');
         session()->flash('message', 'Agence supprimée avec succès');
     }
 

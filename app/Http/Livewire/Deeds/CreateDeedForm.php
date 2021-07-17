@@ -8,9 +8,11 @@ use App\Models\Pole;
 use App\Models\TypeOfRequest;
 use App\Models\Warranty;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateDeedForm extends Component
 {
+    use WithFileUploads;
     //selects options
     public $poles;
     public $warranties;
@@ -43,6 +45,7 @@ class CreateDeedForm extends Component
     public $dateOfTransmissionToTheBO;
     public $inscriptionAmount;
     public $documentation;
+    public $transmissionSlip = [];
 
     //validation rules
     protected function rules()
@@ -67,6 +70,8 @@ class CreateDeedForm extends Component
             'filingDate'                => 'nullable|date',
             'fileWithdrawalDate'        => 'nullable|date',
             'dateOfTransmissionToTheBO' => 'nullable|date',
+            'dateOfTransmissionToTheBO' => 'nullable|date',
+            'transmissionSlip.*'        => 'nullable|file|mimes:pdf,doc,docx',
         ];
     }
 
@@ -78,6 +83,12 @@ class CreateDeedForm extends Component
         'warranty'                  => 'Garantie',
         'referenceOfCreditDecision' => 'Référence décision',
         'purposeOfTheCredit'        => 'Objet du crédit',
+        'transmissionSlip.*'        => 'Bordereau de transmission',
+    ];
+
+    protected $messages = [
+        'transmissionSlip.*.file' => 'Le champ :attribute ne peut contenir que des fichiers de type: pdf, doc ou docx',
+        'transmissionSlip.*.mimes' => 'Le champ :attribute ne peut contenir que des fichiers de type: pdf, doc ou docx',
     ];
 
     public function mount()

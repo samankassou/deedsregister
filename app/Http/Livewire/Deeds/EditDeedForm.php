@@ -65,8 +65,8 @@ class EditDeedForm extends Component
         $this->writtingCompletionDate = optional($deed->writting_completion_date)->format('d/m/Y');
         $this->writtingEndDate = optional($deed->writting_end_date)->format('d/m/Y');
         $this->signatureDate = optional($deed->signature_date)->format('d/m/Y');
-        $this->typesOfRequest = $deed->typeOfRequests;
-        //$this->typesOfRequest = $deed->typeOfRequests->pluck('id');
+        //$this->typesOfRequest = $deed->typeOfRequests;
+        $this->typesOfRequest = $deed->typeOfRequests->pluck('id');
         //dd($deed->typeOfRequests->pluck('id')->toArray());
     }
 

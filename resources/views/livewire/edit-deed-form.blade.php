@@ -53,7 +53,7 @@
                                 class="text-red-500">*</sup></label>
                         <select id="warranty" wire:model="warranty"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            <option value="" class="text-gray-300">Sélectionner un acte</option>
+                            <option value="" class="text-gray-300">Sélectionner une garantie</option>
                             @foreach ($warranties as $warranty)
                             <option value="{{ $warranty->id }}">{{ $warranty->name }}</option>
                             @endforeach
@@ -103,7 +103,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="typesOfRequest" class="block text-sm font-medium text-gray-700">Type de demande<sup
                                 class="text-red-500">*</sup></label>
-                        <x-choice-select wire:model="SelectedTypesOfRequest" :options="$typesOfRequests" :initials="$typesOfRequest" />
+                        <x-choice-select wire:model="selectedTypesOfRequest" :options="$typesOfRequests" :initials="$typesOfRequest" />
                         @error('typesOfRequest') <span class="text-red-500 text-xs italic">{{ $message }}</span>
                         @enderror
                     </div>

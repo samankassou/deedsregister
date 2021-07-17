@@ -13,11 +13,6 @@
             console.log(value, label)
         }
 
-        values = []
-            Array.from($refs.multiple.initials).forEach(function (option) {
-            values.push(option.value || option.text)
-        })
-
         $refs.multiple.addEventListener('change', function (event) {
             values = []
             Array.from($refs.multiple.options).forEach(function (option) {
