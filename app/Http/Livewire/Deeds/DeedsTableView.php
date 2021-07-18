@@ -101,7 +101,6 @@ class DeedsTableView extends TableView
         $data = $this->query->items();
         $fileName = 'liste_des_actes_' . today()->format('d-m-Y') . '.xlsx';
         return Excel::download(new DeedExport(collect($data)), $fileName);
-        //dd($data);
     }
 
     public function paginate($value)
