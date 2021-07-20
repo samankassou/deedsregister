@@ -18,7 +18,8 @@
         "livewire-ui/modal": "^1.0",
         "livewire/livewire": "^2.5",
         "maatwebsite/excel": "^3.1",
-        "santigarcor/laratrust": "^6.3"
+        "santigarcor/laratrust": "^6.3",
+        "spatie/laravel-medialibrary": "^9.0.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -1,5 +1,6 @@
 <?php
 
+use App\Charts\TypesOfRequestsChart;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\Dashboard;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Admin\UserController;
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::view('/', 'home')->name('home');
+Route::get('types-of-requests-chart', [TypesOfRequestsChart::class, 'handler'])->name('charts.typesOfRequests.chart')->prefix('charts');
 Route::group(
     [
         'middleware' => 'auth',
@@ -29,6 +31,7 @@ Route::group(
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
         //deeds routes
+
         Route::get('deeds/{deed}/print', [DeedController::class, 'print'])->name('deeds.print');
         Route::get('deeds/deleted', [DeedController::class, 'deleted'])->name('deeds.deleted');
         Route::resource('deeds', DeedController::class);

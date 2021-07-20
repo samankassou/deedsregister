@@ -9,8 +9,7 @@
         });
 
         for (const [value, label] of Object.entries(values)) {
-            choices.setChoiceByValue(value || label)
-            console.log(value, label)
+            choices.setChoiceByValue(label+'')
         }
 
         $refs.multiple.addEventListener('change', function (event) {

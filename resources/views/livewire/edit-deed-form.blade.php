@@ -24,41 +24,41 @@
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="agency" class="block text-sm font-medium text-gray-700">Agence<sup
+                        <label for="agencyId" class="block text-sm font-medium text-gray-700">Agence<sup
                                 class="text-red-500">*</sup></label>
-                        <select id="agency" wire:model="agency"
+                        <select id="agencyId" wire:model="agencyId"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             @foreach ($agencies as $agency)
                             <option value="{{ $agency->id }}">{{ $agency->name }}</option>
                             @endforeach
                         </select>
-                        @error('agency') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+                        @error('agencyId') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="pole" class="block text-sm font-medium text-gray-700">Pôle<sup
+                        <label for="poleId" class="block text-sm font-medium text-gray-700">Pôle<sup
                                 class="text-red-500">*</sup></label>
-                        <select id="pole" wire:model="pole"
+                        <select id="poleId" wire:model="poleId"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value="" class="text-gray-300">Sélectionnez un pôle</option>
                             @foreach ($poles as $pole)
                             <option value="{{ $pole->id }}">{{ $pole->name }}</option>
                             @endforeach
                         </select>
-                        @error('pole') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+                        @error('poleId') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="warranty" class="block text-sm font-medium text-gray-700">Type de garantie<sup
+                        <label for="warrantyId" class="block text-sm font-medium text-gray-700">Type de garantie<sup
                                 class="text-red-500">*</sup></label>
-                        <select id="warranty" wire:model="warranty"
+                        <select id="warrantyId" wire:model="warrantyId"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value="" class="text-gray-300">Sélectionner une garantie</option>
                             @foreach ($warranties as $warranty)
                             <option value="{{ $warranty->id }}">{{ $warranty->name }}</option>
                             @endforeach
                         </select>
-                        @error('warranty') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+                        @error('warrantyId') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
@@ -103,7 +103,9 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="typesOfRequest" class="block text-sm font-medium text-gray-700">Type de demande<sup
                                 class="text-red-500">*</sup></label>
-                        <x-choice-select wire:model="selectedTypesOfRequest" :options="$typesOfRequests" :initials="$typesOfRequest" />
+                        <div wire:ignore>
+                            <x-choice-select wire:model="typesOfRequest" :options="$typesOfRequests" />
+                        </div>
                         @error('typesOfRequest') <span class="text-red-500 text-xs italic">{{ $message }}</span>
                         @enderror
                     </div>
@@ -214,9 +216,9 @@
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="writtingAmount"
                                                     class="block text-sm font-medium text-gray-700">Montant</label>
-                                                <input type="text" wire:model="writtingAmount" id="writtingAmount"
+                                                <input type="text" wire:model="registrationAmount" id="registrationAmount"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                                @error('writtingAmount') <span
+                                                @error('registrationAmount') <span
                                                     class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                             </div>
 
@@ -294,7 +296,7 @@
                                                 <label for="inscriptionAmount"
                                                     class="block text-sm font-medium text-gray-700">Montant de
                                                     l'inscription</label>
-                                                <input type="number" name="inscriptionAmount" id="inscriptionAmount"
+                                                <input type="number" wire:model="inscriptionAmount" id="inscriptionAmount"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                 @error('inscriptionAmount') <span
                                                     class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -322,8 +324,8 @@
                         <select wire:model="debitAdviceNotified" id="debitAdviceNotified"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value=""></option>
-                            <option value="Oui">Oui</option>
-                            <option value="Non">Non</option>
+                            <option value="oui">Oui</option>
+                            <option value="non">Non</option>
                         </select>
                         @error('debitAdviceNotified') <span class="text-red-500 text-xs italic">{{ $message }}</span>
                         @enderror
@@ -339,7 +341,7 @@
                 </div>
             </div>
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                <button type="submit" wire:click.prevent="store"
+                <button type="submit" wire:target="save" wire:loading.attr="disabled" wire:click.prevent="save"
                     class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Enregistrer
                 </button>
