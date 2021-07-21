@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -38,6 +39,66 @@ class Deed extends Model
         'date_of_transmission_to_the_BO', 'inscription_amount', 'pole_id',
         'warranty_id', 'agency_id'
     ];
+
+    public function setDateOfReceiptOfTheRequestAttribute($value)
+    {
+        if ($value)
+            $this->attributes['date_of_receipt_of_the_request'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+
+    public function setWrittingEndDateAttribute($value)
+    {
+        if ($value)
+            $this->attributes['writting_end_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+
+    public function setSignatureDateAttribute($value)
+    {
+        if ($value)
+            $this->attributes['signature_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+
+    public function setWrittingCompletionDateAttribute($value)
+    {
+        if ($value)
+            $this->attributes['writting_completion_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+
+    public function setRegistrationSendingDateAttribute($value)
+    {
+        if ($value)
+            $this->attributes['registration_sending_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+
+    public function setRegistrationReturnDateAttribute($value)
+    {
+        if ($value)
+            $this->attributes['registration_return_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+
+    public function setFileCompletionDateAttribute($value)
+    {
+        if ($value)
+            $this->attributes['file_completion_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+
+    public function setFilingDateAttribute($value)
+    {
+        if ($value)
+            $this->attributes['filing_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+
+    public function setFileWithdrawalDateAttribute($value)
+    {
+        if ($value)
+            $this->attributes['file_withdrawal_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+
+    public function setDateOfTransmissionToTheBOAttribute($value)
+    {
+        if ($value)
+            $this->attributes['date_of_transmission_to_the_BO'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
 
     public function pole()
     {
