@@ -36,8 +36,10 @@ class DeleteDeedAction extends Action
             $model->delete();
         }
         $this->view->emit('deedDeleted');
-        // Your code here
-        $this->success("Acte(s) supprimé(s)!");
+        $this->view->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Acte(s) supprimé(s)!'
+        ]);
     }
 
     public function getConfirmationMessage($item = null)

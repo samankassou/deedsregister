@@ -34,6 +34,9 @@ class RestoreDeedAction extends Action
             $arg->restore();
         }
         $this->view->emit('deedRestored');
-        $this->success("Acte(s) restauré(s)");
+        $this->view->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Acte(s) restauré(s)'
+        ]);
     }
 }

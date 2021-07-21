@@ -41,7 +41,10 @@ class ForceDeleteDeedAction extends Action
             $arg->forceDelete();
         }
         $this->view->emit('deedForceDeleted');
-        $this->success("Acte(s) supprimé(s)!");
+        $this->view->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Acte(s) supprimé(s)!'
+        ]);
     }
 
     public function getConfirmationMessage($item = null)
