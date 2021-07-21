@@ -28,7 +28,7 @@ class DeedDetailView extends DetailView
         $data =  [
             'Code Client' => $model->client_code,
             'Client' => $model->client,
-            'Date réception demande' => $model->date_of_receipt_of_the_request->format('d/m/Y'),
+            'Date réception demande' => optional($model->date_of_receipt_of_the_request)->format('d/m/Y'),
             'Notaire' => $model->notary,
             'Correspondant Notaire' => $model->correspondaent_of_the_notary,
             'Objet du crédit' => $model->purpose_of_the_credit,

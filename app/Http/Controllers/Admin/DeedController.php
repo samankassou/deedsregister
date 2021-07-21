@@ -7,6 +7,7 @@ use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
+use App\Models\TypeOfRequest;
 
 class DeedController extends Controller
 {
@@ -69,9 +70,10 @@ class DeedController extends Controller
      */
     public function print(Deed $deed)
     {
+        $typesOfRequests = TypeOfRequest::all();
         $pdf = App::make('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('admin.deeds.pdfs.show', compact('deed'));
+        $pdf->loadView('admin.deeds.pdfs.show', compact('deed', 'typesOfRequests'));
         return $pdf->stream();
     }
 }
