@@ -20,6 +20,9 @@ use App\Http\Controllers\Admin\UserController;
 |
 */
 
+Route::get('test-email', function () {
+    Mail::to(auth()->user())->send(new TestMail);
+});
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::view('/', 'home')->name('home');
 Route::get('types-of-requests-chart', [TypesOfRequestsChart::class, 'handler'])->name('charts.typesOfRequests.chart')->prefix('charts');

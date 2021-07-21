@@ -362,6 +362,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="flex flex-col mt-2">
+                            @foreach ($deed->getMedia('deeds') as $file)
+                            <div class="flex justify-between">
+                                <a class="text-indigo-500 underline" href="{{ $file->getUrl() }}">{{ $file->name }}</a> <a class="text-red-500" href="#" wire:click.prevent="deleteFile({{ $file->id }})">Supprimer</a>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                     @error('transmissionSlip.*') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>

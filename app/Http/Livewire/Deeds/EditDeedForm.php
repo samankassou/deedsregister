@@ -9,6 +9,7 @@ use App\Models\TypeOfRequest;
 use App\Models\Warranty;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class EditDeedForm extends Component
 {
@@ -131,7 +132,6 @@ class EditDeedForm extends Component
     public function save()
     {
         $this->validate();
-        //dd($this->deed);
         $data = [
             'client'                         => $this->client,
             'client_code'                    => $this->clientCode,
@@ -164,6 +164,17 @@ class EditDeedForm extends Component
         session()->flash('alert', 'success');
         session()->flash('message', 'Modifications enregistrées avec succès.');
         return redirect()->route('admin.deeds.show', $this->deed);
+    }
+
+    public function deleteFile($id)
+    {
+        Media::find($id)->delete();
+        $this->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'fichier supprimé avec succès'
+        ]);
+        $this->deed->fresh();
+        $this->client = $this->client;
     }
 
     public function render()
