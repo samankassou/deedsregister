@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Deed;
-use Barryvdh\DomPDF\PDF;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use App\Models\TypeOfRequest;

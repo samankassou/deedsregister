@@ -1,6 +1,8 @@
 <?php
 
+use App\Mail\TestMail;
 use App\Charts\TypesOfRequestsChart;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\Dashboard;

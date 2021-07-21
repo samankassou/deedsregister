@@ -8,17 +8,55 @@ use App\Models\Pole;
 use App\Models\TypeOfRequest;
 use App\Models\Warranty;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class EditDeedForm extends Component
 {
+    use WithFileUploads;
     public $deed;
 
-    protected $rules = [
-        'client'      => 'required',
-        'clientCode' => 'required',
-        'agencyId'   => 'required|exists:agencies,id',
-        'poleId'     => 'required|exists:poles,id',
-        'warrantyId' => 'required|exists:warranties,id',
+    //validation rules
+    protected function rules()
+    {
+        return [
+            'client'                    => 'required',
+            'clientCode'                => 'nullable',
+            'agencyId'                  => 'required',
+            'poleId'                    => 'required',
+            'warrantyId'                => 'required',
+            'referenceOfCreditDecision' => 'required',
+            'purposeOfTheCredit'        => 'required',
+            'inscriptionAmount'         => 'nullable|integer',
+            'registrationAmount'        => 'nullable|integer',
+            'dateOfReceiptOfTheRequest' => 'nullable|date',
+            'writtingCompletionDate'    => 'nullable|date',
+            'writtingEndDate'           => 'nullable|date',
+            'signatureDate'             => 'nullable|date',
+            'registrationSendingDate'   => 'nullable|date',
+            'registrationReturnDate'    => 'nullable|date',
+            'fileCompletionDate'        => 'nullable|date',
+            'filingDate'                => 'nullable|date',
+            'fileWithdrawalDate'        => 'nullable|date',
+            'dateOfTransmissionToTheBO' => 'nullable|date',
+            'dateOfTransmissionToTheBO' => 'nullable|date',
+            'transmissionSlip.*'        => 'nullable|file|mimes:pdf,doc,docx',
+        ];
+    }
+
+    protected $validationAttributes = [
+        'client'                    => 'Client',
+        'clientCode'                => 'Client',
+        'agencyId'                    => 'Agence',
+        'poleId'                      => 'Pôle',
+        'warrantyId'                  => 'Garantie',
+        'referenceOfCreditDecision' => 'Référence décision',
+        'purposeOfTheCredit'        => 'Objet du crédit',
+        'transmissionSlip.*'        => 'Bordereau de transmission',
+    ];
+
+    protected $messages = [
+        'transmissionSlip.*.file' => 'Le champ :attribute ne peut contenir que des fichiers de type: pdf, doc ou docx',
+        'transmissionSlip.*.mimes' => 'Le champ :attribute ne peut contenir que des fichiers de type: pdf, doc ou docx',
     ];
 
     //selects options
@@ -53,6 +91,7 @@ class EditDeedForm extends Component
     public $dateOfTransmissionToTheBO;
     public $inscriptionAmount;
     public $documentation;
+    public $transmissionSlip = [];
 
     public function mount(Deed $deed)
     {
