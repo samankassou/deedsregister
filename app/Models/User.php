@@ -10,8 +10,7 @@ use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
-    use LaratrustUserTrait;
-    use HasFactory, Notifiable;
+    use LaratrustUserTrait, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.

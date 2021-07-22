@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Role;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User as Model;
@@ -19,6 +20,10 @@ class User extends Component
 
     public $mode = 'create';
 
+    public $allRoles;
+
+    public $roles = [];
+
     public $showForm = false;
 
     public $primaryId = null;
@@ -33,21 +38,16 @@ class User extends Component
             return [
                 'name' => 'required',
                 'email' => 'required|email|unique:users',
+                'roles.*' => 'required|exists:roles,id',
 
             ];
         }
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $this->primaryId,
+            'roles.*' => 'required|exists:roles,id'
 
         ];
-    }
-
-
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
     }
 
     public function updatingSearch()
@@ -57,9 +57,11 @@ class User extends Component
 
     public function render()
     {
+        $this->allRoles = Role::all();
         $model = Model::where('name', 'like', '%' . $this->search . '%')->orWhere('email', 'like', '%' . $this->search . '%')->latest()->paginate($this->paginate);
         return view('livewire.user', [
-            'rows' => $model
+            'rows' => $model,
+            'allRoles' => $this->allRoles
         ]);
     }
 
@@ -79,6 +81,7 @@ class User extends Component
 
         $this->name = $model->name;
         $this->email = $model->email;
+        $this->roles = $model->roles->pluck('id')->toArray();
 
 
         $this->showForm = true;
@@ -86,6 +89,7 @@ class User extends Component
 
     public function closeForm()
     {
+        $this->resetForm();
         $this->showForm = false;
     }
 
@@ -100,8 +104,13 @@ class User extends Component
         $model->password = bcrypt("scb123");
         $model->save();
 
+        $model->roles()->attach($this->roles);
+
         $this->resetForm();
-        session()->flash('message', 'Utilisateur créé avec succès');
+        $this->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Utilisateur créé avec succès'
+        ]);
         $this->showForm = false;
     }
 
@@ -109,6 +118,7 @@ class User extends Component
     {
         $this->name = "";
         $this->email = "";
+        $this->roles = [];
     }
 
 
@@ -121,11 +131,15 @@ class User extends Component
         $model->name = $this->name;
         $model->email = $this->email;
         $model->save();
+        $model->roles()->sync($this->roles);
 
         $this->closeForm();
         $this->resetForm();
 
-        session()->flash('message', 'Utilisateur modifié avec succès');
+        $this->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Utilisateur modifié avec succès'
+        ]);
     }
 
     public function confirmDelete($primaryId)
@@ -138,11 +152,9 @@ class User extends Component
     {
         Model::find($this->primaryId)->delete();
         $this->showConfirmDeletePopup = false;
-        session()->flash('message', 'Record Deleted Successfully');
-    }
-
-    public function clearFlash()
-    {
-        session()->forget('message');
+        $this->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Utilisateur supprimé avec succès'
+        ]);
     }
 }

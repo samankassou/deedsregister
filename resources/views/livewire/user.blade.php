@@ -1,20 +1,4 @@
 <div>
-    @if (session()->has('message'))
-    <div class="flex mx-auto w-1/4 sm:w-full md:w-full">
-        <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500 mx-auto">
-            <span class="flex items-center align-middle mr-8">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>{{ session('message') }}
-            </span>
-            <button wire:click="clearFlash()"
-                class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
-                <span>×</span>
-            </button>
-        </div>
-    </div>
-    @endif
     <div>
         <div class="flex flex-col w-full">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -60,6 +44,11 @@
                                     Email
                                 </th>
 
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Roles
+                                </th>
+
                                 <th scope="col" class="relative px-6 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
@@ -73,6 +62,9 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ $row->email}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ optional($row->roles)->implode('display_name', ', ')}}
                                 </td>
 
                                 <td
@@ -144,7 +136,7 @@
                                             class='mt-1 block w-full rounded-md border-gray-300 shadow-sm @error('
                                             name') border-red-500 @enderror focus:border-indigo-300 focus:ring
                                             focus:ring-indigo-200 focus:ring-opacity-50'
-                                            wire:model='name'>@error('code')<span
+                                            wire:model='name'>@error('name')<span
                                             class='text-red-500 text-sm'>{{ $message }}</span>@enderror
                                     </label>
                                 </div>
@@ -159,6 +151,21 @@
                                                 focus:ring-indigo-200 focus:ring-opacity-50'
                                                 wire:model='email'>@error('email')<span
                                                 class='text-red-500 text-sm'>{{ $message }}</span>@enderror
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <div class="mt-2">
+                                    <div wire:ignore>
+                                        <label class='block'><span class='text-gray-700 @error(' roles') text-red-500 @enderror'>Roles</span>
+                                            <select wire:model="roles" class='choices mt-1 block w-full rounded-md border-gray-300 shadow-sm @error(' roles')
+                                                border-red-500 @enderror focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50' multiple>
+                                                @foreach ($allRoles as $role)
+                                                    <option value="{{ $role->id }}" {{ collect($roles)->contains($role->id) ? 'selected' : '' }}>{{ $role->display_name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('roles')<span class='text-red-500 text-sm'>{{ $message }}</span>@enderror
                                         </label>
                                     </div>
 
@@ -186,7 +193,7 @@
 
         {{--    delete popup--}}
         @if($showConfirmDeletePopup)
-        <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed z-10 inset-0 overflow-y-auto transition-opacity duration-150" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 bg-gray-200 opacity-75 transition-opacity" aria-hidden="true"></div>
 
