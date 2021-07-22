@@ -38,6 +38,7 @@ class User extends Component
             return [
                 'name' => 'required',
                 'email' => 'required|email|unique:users',
+                'roles' => 'required',
                 'roles.*' => 'required|exists:roles,id',
 
             ];
@@ -45,6 +46,7 @@ class User extends Component
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $this->primaryId,
+            'roles' => 'required',
             'roles.*' => 'required|exists:roles,id'
 
         ];
@@ -81,7 +83,7 @@ class User extends Component
 
         $this->name = $model->name;
         $this->email = $model->email;
-        $this->roles = $model->roles->pluck('id')->toArray();
+        $this->roles = optional($model->roles)->pluck('id')->toArray();
 
 
         $this->showForm = true;
@@ -116,9 +118,11 @@ class User extends Component
 
     public function resetForm()
     {
+        $this->primaryId = null;
         $this->name = "";
         $this->email = "";
         $this->roles = [];
+        $this->resetErrorBag();
     }
 
 

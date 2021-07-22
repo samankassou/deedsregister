@@ -5,3 +5,4 @@
         @livewire('user')
     </div>
 @endsection
+
