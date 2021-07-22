@@ -16,6 +16,8 @@ class EditDeedForm extends Component
     use WithFileUploads;
     public $deed;
 
+    protected $listeners = ['resfresh' => '$refresh'];
+
     //validation rules
     protected function rules()
     {
@@ -160,6 +162,11 @@ class EditDeedForm extends Component
         ];
         $this->deed->update($data);
         $this->deed->typeOfRequests()->sync($this->typesOfRequest);
+        foreach ($this->transmissionSlip as $file) {
+            $this->deed->addMedia($file->getRealPath())
+                ->usingName($file->getClientOriginalName())
+                ->toMediaCollection('deeds', 'public');
+        }
 
         session()->flash('alert', 'success');
         session()->flash('message', 'Modifications enregistrées avec succès.');
@@ -168,13 +175,14 @@ class EditDeedForm extends Component
 
     public function deleteFile($id)
     {
-        Media::find($id)->delete();
-        $this->dispatchBrowserEvent('alert-emit', [
-            'alert' => 'success',
-            'message' => 'fichier supprimé avec succès'
-        ]);
-        $this->deed->fresh();
-        $this->client = $this->client;
+        if (intval($id)) {
+            Media::find($id)->delete();
+            $this->dispatchBrowserEvent('alert-emit', [
+                'alert' => 'success',
+                'message' => 'fichier supprimé avec succès'
+            ]);
+            $this->emitSelf('refresh');
+        }
     }
 
     public function render()
