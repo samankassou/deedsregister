@@ -1,19 +1,4 @@
 <div>
-    @if (session()->has('message'))
-        <div class="flex mx-auto w-1/4 sm:w-full md:w-full">
-            <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500 mx-auto">
-            <span class="flex items-center align-middle mr-8">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>{{ session('message') }}
-              </span>
-                <button wire:click="clearFlash()"
-                    class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
-                    <span>×</span>
-                </button>
-            </div>
-        </div>
-    @endif
     <div>
         <div class="flex flex-col w-full">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

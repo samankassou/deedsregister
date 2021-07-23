@@ -66,9 +66,6 @@ class Warranty extends Component
         $model = Model::find($primaryId);
 
         $this->name = $model->name;
-
-
-
         $this->showForm = true;
     }
 
@@ -87,7 +84,10 @@ class Warranty extends Component
         $model->save();
 
         $this->resetForm();
-        session()->flash('message', 'Record Saved Successfully');
+        $this->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Garantie créée avec succès'
+        ]);
         $this->showForm = false;
     }
 
@@ -109,7 +109,10 @@ class Warranty extends Component
         $this->resetForm();
         $this->closeForm();
 
-        session()->flash('message', 'Record Updated Successfully');
+        $this->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Garantie modifiée avec succès'
+        ]);
     }
 
     public function confirmDelete($primaryId)
@@ -122,11 +125,9 @@ class Warranty extends Component
     {
         Model::find($this->primaryId)->delete();
         $this->showConfirmDeletePopup = false;
-        session()->flash('message', 'Record Deleted Successfully');
-    }
-
-    public function clearFlash()
-    {
-        session()->forget('message');
+        $this->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Garantie supprimée avec succès'
+        ]);
     }
 }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Jobs\SendWelcomeEmail;
+use App\Mail\WelcomeMail;
 use App\Models\Role;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User as Model;
-
+use Illuminate\Support\Facades\Mail;
 
 class User extends Component
 {
@@ -107,7 +109,8 @@ class User extends Component
         $model->save();
 
         $model->roles()->attach($this->roles);
-
+        SendWelcomeEmail::dispatch($model)
+            ->delay(now()->addMinutes(1));
         $this->resetForm();
         $this->dispatchBrowserEvent('alert-emit', [
             'alert' => 'success',
