@@ -43,6 +43,9 @@ class CreateDeedsTable extends Migration
             $table->foreignId('pole_id');
             $table->foreignId('warranty_id');
             $table->foreignId('agency_id');
+            $table->foreignId('created_by')->nullable();
+            $table->foreignId('updated_by')->nullable();
+            $table->foreignId('deleted_by')->nullable();
 
             $table->text('documentation')->nullable();
 

@@ -41,7 +41,9 @@ class DeletedDeedsTableView extends TableView
             Header::title('Agence'),
             'Pôle',
             'Garantie',
-            'Décision de crédit'
+            'Décision de crédit',
+            'Supprimé le',
+            'Supprimé par'
         ];
     }
 
@@ -58,7 +60,9 @@ class DeletedDeedsTableView extends TableView
             $model->agency->name,
             $model->pole->name,
             $model->warranty->name,
-            $model->reference_of_credit_decision
+            $model->reference_of_credit_decision,
+            optional($model->deleted_at)->format('d/m/Y'),
+            optional($model->deletedBy)->name,
         ];
     }
 

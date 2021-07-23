@@ -39,7 +39,8 @@ class Deed extends Model implements HasMedia
         'registration_sending_date', 'registration_return_date',
         'registration_amount', 'file_completion_date', 'filing_date', 'file_withdrawal_date',
         'date_of_transmission_to_the_BO', 'inscription_amount', 'pole_id',
-        'warranty_id', 'agency_id'
+        'warranty_id', 'agency_id', 'updated_by',
+        'created_by', 'deleted_by'
     ];
 
     public function setDateOfReceiptOfTheRequestAttribute($value)
@@ -115,6 +116,16 @@ class Deed extends Model implements HasMedia
     public function agency()
     {
         return $this->belongsTo(Agency::class);
+    }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by', 'id');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
     public function typeOfRequests()

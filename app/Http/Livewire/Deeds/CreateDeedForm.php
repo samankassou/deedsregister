@@ -102,7 +102,6 @@ class CreateDeedForm extends Component
     public function store()
     {
         $this->validate();
-        //dd($this->transmissionSlip);
         $data = [
             'client'                         => $this->client,
             'client_code'                    => $this->clientCode,
@@ -127,7 +126,9 @@ class CreateDeedForm extends Component
             'filing_date'                    => $this->filingDate,
             'file_withdrawal_date'           => $this->fileWithdrawalDate,
             'date_of_transmission_to_the_BO' => $this->dateOfTransmissionToTheBO,
-            'documentation'                  => $this->documentation
+            'documentation'                  => $this->documentation,
+            'created_by'                     => auth()->user()->id,
+            'updated_by'                     => auth()->user()->id,
         ];
         $deed = Deed::create($data);
         foreach ($this->transmissionSlip as $file) {

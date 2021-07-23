@@ -158,7 +158,8 @@ class EditDeedForm extends Component
             'file_withdrawal_date'           => $this->fileWithdrawalDate,
             'date_of_transmission_to_the_BO' => $this->dateOfTransmissionToTheBO,
             'inscription_amount'             => $this->inscriptionAmount,
-            'documentation'                  => $this->documentation
+            'documentation'                  => $this->documentation,
+            'updated_by'                     => auth()->user()->id,
         ];
         $this->deed->update($data);
         $this->deed->typeOfRequests()->sync($this->typesOfRequest);

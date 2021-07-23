@@ -31,8 +31,11 @@ class DeleteDeedAction extends Action
     public function handle($model, View $view)
     {
         if (is_array($model)) {
+            Deed::whereIn('id', $model)
+                ->update(['deleted_by' => auth()->user()->id]);
             Deed::destroy($model);
         } else {
+            $model->update(['deleted_by' => auth()->user()->id]);
             $model->delete();
         }
         $this->view->emit('deedDeleted');
