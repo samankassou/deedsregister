@@ -1,14 +1,11 @@
 <?php
 
-use App\Mail\TestMail;
-use App\Charts\TypesOfRequestsChart;
-use Illuminate\Support\Facades\Mail;
+
+use App\Models\Deed;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\Dashboard;
-use App\Http\Controllers\PrintDeedController;
-use App\Http\Controllers\Admin\DeedController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PrintDeedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +42,11 @@ Route::middleware('auth')->group(function () {
             ->name('deeds.print');
         Route::view('deeds', 'admin.deeds.index')->name('deeds.index');
         Route::view('deeds/create', 'admin.deeds.create')->name('deeds.create');
-        Route::view('deeds/{deed}/edit', 'admin.deeds.edit')->name('deeds.edit');
-        Route::view('deeds/{deed}', 'admin.deeds.show')->name('deeds.show');
+        Route::get('deeds/{deed}/edit', function (Deed $deed) {
+            return view('admin.deeds.edit', compact('deed'));
+        })->name('deeds.edit');
+        Route::get('deeds/{deed}', function (Deed $deed) {
+            return view('admin.deeds.show', compact('deed'));
+        })->name('deeds.show');
     });
 });

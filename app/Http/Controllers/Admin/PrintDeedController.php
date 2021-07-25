@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\TypeOfRequest;
 use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
+use App\Models\Deed;
 
 class PrintDeedController extends Controller
 {
@@ -14,9 +16,8 @@ class PrintDeedController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, Deed $deed)
     {
-        $deed = $request->deed;
         $typesOfRequests = TypeOfRequest::all();
         $pdf = App::make('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);
