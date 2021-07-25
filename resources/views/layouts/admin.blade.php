@@ -31,14 +31,15 @@
                 </li>
             </ul>
             <ul>
+                @permission('view-deeds')
                 <li class="relative px-6 py-3">
                     @if (request()->routeIs('admin.deeds.*'))
                     <x-active-menu />
                     @endif
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 {{ request()->routeIs('admin.deeds.*') ? 'text-gray-800' : '' }} hover:text-gray-800 dark:hover:text-gray-200"
                         href="{{ route('admin.deeds.index') }}">
-                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
                             </path>
@@ -46,7 +47,9 @@
                         <span class="ml-4">Actes</span>
                     </a>
                 </li>
+                @endpermission
 
+                @permission('view-warranties')
                 <li class="relative px-6 py-3">
                     @if (request()->routeIs('admin.warranties.*'))
                     <x-active-menu />
@@ -60,7 +63,9 @@
                         <span class="ml-4">Garanties</span>
                     </a>
                 </li>
+                @endpermission
 
+                @permission('view-agencies')
                 <li class="relative px-6 py-3">
                     @if (request()->routeIs('admin.agencies.*'))
                     <x-active-menu />
@@ -74,7 +79,9 @@
                         <span class="ml-4">Agences</span>
                     </a>
                 </li>
+                @endpermission
 
+                @permission('view-users')
                 <li class="relative px-6 py-3">
                     @if (request()->routeIs('admin.users.*'))
                     <x-active-menu />
@@ -89,6 +96,7 @@
                         <span class="ml-4">Utilisateurs</span>
                     </a>
                 </li>
+                @endpermission
             </ul>
 
         </div>
@@ -195,7 +203,7 @@
                                             </path>
                                             <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         </svg>
-                                        <span>Settings</span>
+                                        <span>Parametres</span>
                                     </a>
                                 </li>
                                 <li class="flex">

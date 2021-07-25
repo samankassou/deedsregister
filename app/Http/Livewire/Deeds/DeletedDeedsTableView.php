@@ -68,18 +68,24 @@ class DeletedDeedsTableView extends TableView
 
     protected function actionsByRow()
     {
-        return [
-            new RestoreDeedAction,
-            new ForceDeleteDeedAction,
-        ];
+        if (auth()->user()->isAbleTo('forceDdelete-deed')) {
+            return [
+                new RestoreDeedAction,
+                new ForceDeleteDeedAction,
+            ];
+        }
+        return [];
     }
 
     protected function bulkActions()
     {
-        return [
-            new RestoreDeedAction,
-            new ForceDeleteDeedAction
-        ];
+        if (auth()->user()->isAbleTo('forceDdelete-deed')) {
+            return [
+                new RestoreDeedAction,
+                new ForceDeleteDeedAction,
+            ];
+        }
+        return [];
     }
 
     public function getConfirmationMessage($item = null)
