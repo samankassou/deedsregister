@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             TypeOfRequestSeeder::class,
             WarrantySeeder::class,
             DeedSeeder::class,
+            PermissionSeeder::class
         ]);
     }
 }
