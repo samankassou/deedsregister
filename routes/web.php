@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\Dashboard;
+use App\Http\Controllers\PrintDeedController;
 use App\Http\Controllers\Admin\DeedController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -20,28 +21,31 @@ use App\Http\Controllers\Admin\UserController;
 |
 */
 
-Route::get('test-email', function () {
-    Mail::to(auth()->user())->send(new TestMail);
-});
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::view('/', 'home')->name('home');
-Route::get('types-of-requests-chart', [TypesOfRequestsChart::class, 'handler'])->name('charts.typesOfRequests.chart')->prefix('charts');
-Route::group(
-    [
-        'middleware' => 'auth',
-        'prefix'     => 'admin',
-        'as'         => 'admin.'
-    ],
-    function () {
+
+
+//deeds routes
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // admin prefix and name
+    Route::prefix('admin')->as('admin.')->group(function () {
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
-        //deeds routes
+        //admin only routes
+        Route::middleware(['role:admin'])->group(function () {
+            Route::view('agencies', 'admin.agencies.index')->name('agencies.index');
+            Route::view('warranties', 'admin.warranties.index')->name('warranties.index');
+            Route::view('users', 'admin.users.index')->name('users.index');
+        });
 
-        Route::get('deeds/{deed}/print', [DeedController::class, 'print'])->name('deeds.print');
-        Route::get('deeds/deleted', [DeedController::class, 'deleted'])->name('deeds.deleted');
-        Route::resource('deeds', DeedController::class);
-        Route::get('users', [UserController::class, 'index'])->name('users.index');
-        Route::view('agencies', 'admin.agencies.index')->name('agencies.index');
-        Route::view('warranties', 'admin.warranties.index')->name('warranties.index');
-    }
-);
+        //commons routes(admin and writter)
+        Route::view('deeds/deleted', 'admin.deeds.deleted.index')->name('deeds.deleted.index');
+        Route::get('deeds/{deed}/print', PrintDeedController::class)
+            ->name('deeds.print');
+        Route::view('deeds', 'admin.deeds.index')->name('deeds.index');
+        Route::view('deeds/create', 'admin.deeds.create')->name('deeds.create');
+        Route::view('deeds/{deed}/edit', 'admin.deeds.edit')->name('deeds.edit');
+        Route::view('deeds/{deed}', 'admin.deeds.show')->name('deeds.show');
+    });
+});
