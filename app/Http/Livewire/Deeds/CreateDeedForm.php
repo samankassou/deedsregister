@@ -119,6 +119,12 @@ class CreateDeedForm extends Component
 
     public function render()
     {
+        if (count($this->getErrorBag()->all())) {
+            $this->dispatchBrowserEvent('alert-emit', [
+                'alert' => 'error',
+                'message' => 'Veuillez vérifier les informations saisies'
+            ]);
+        }
         return view('livewire.create-deed-form');
     }
 }

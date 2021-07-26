@@ -10,10 +10,6 @@
             <!-- dot -->
             <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
         </div>
-        <!-- label -->
-        <div class="ml-3 text-gray-700 font-medium">
-            Status
-        </div>
     </label>
 
 </div>

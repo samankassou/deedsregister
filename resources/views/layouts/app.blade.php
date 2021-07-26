@@ -12,7 +12,7 @@
         /* Toggle A */
         input:checked ~ .dot {
         transform: translateX(100%);
-        background-color: #48bb78;
+        background-color: rgb(79, 70, 221);
         }
     </style>
     @livewireStyles
