@@ -3,13 +3,7 @@
         <div class="flex flex-col w-full">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="overflow-hidden  sm:rounded-lg p-2 flex flex-row justify-between">
-                        <div class="w-1/4">
-                            <input wire:model="search" placeholder="Rechercher..."
-                                class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-1/2"
-                                id="search" type="text" name="search" wire:model="search" required="required"
-                                autofocus="autofocus">
-                        </div>
+                    <div class="overflow-hidden  sm:rounded-lg p-2 flex flex-row justify-end">
                         <div>
                             <button type="submit"
                                 class="inline-flex items-center px-3 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
@@ -21,6 +15,30 @@
                                 </svg>
                                 Créer
                             </button>
+                        </div>
+                    </div>
+                    <div class="py-4 px-3 pb-0 w-1/3">
+                        <div class="md:flex items-center">
+                            <div class="flex-1">
+                                <div class="relative text-left mb-4">
+                                    <label class="block">
+
+                                    </label>
+                                    <input
+                                        class="appearance-none w-full bg-white border-gray-300 hover:border-gray-500 px-3 py-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 focus:border-2 border"
+                                        type="text" name="" placeholder="Rechercher..." autocomplete="off" wire:model="search">
+                                    <div class="absolute right-0 top-0 mt-2 mr-4 text-purple-lighter">
+                                        <a wire:click.prevent="clearSearch" href="#" class="text-gray-400 hover:text-blue-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-search w-4">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -49,6 +67,11 @@
                                     Roles
                                 </th>
 
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider">
+
+                                </th>
+
                                 <th scope="col" class="relative px-6 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
@@ -67,6 +90,9 @@
                                     {{ optional($row->roles)->implode('display_name', ', ')}}
                                 </td>
 
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    @livewire('toggle-user-status', ['user' => $row->id])
+                                </td>
                                 <td
                                     class="flex items-center justify-end px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="#" title="Modifier" class="text-indigo-600 hover:text-indigo-900"

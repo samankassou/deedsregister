@@ -8,6 +8,13 @@
     <title>{{ $title ?? "Inconnu" }} | {{ config('app.name') }}</title>
     <link rel="icon" href="{{ asset('favicon.jpeg') }}" type="image/jpeg" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        /* Toggle A */
+        input:checked ~ .dot {
+        transform: translateX(100%);
+        background-color: #48bb78;
+        }
+    </style>
     @livewireStyles
     <script src="{{ asset('js/vendor/alpine.min.js') }}" defer></script>
     @yield('styles')
