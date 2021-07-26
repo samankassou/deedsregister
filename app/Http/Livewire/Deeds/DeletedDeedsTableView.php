@@ -5,9 +5,10 @@ namespace App\Http\Livewire\Deeds;
 use App\Models\Deed;
 use LaravelViews\Facades\Header;
 use LaravelViews\Views\TableView;
+use App\Actions\RestoreDeedAction;
 use LaravelViews\Actions\Confirmable;
 use App\Actions\ForceDeleteDeedAction;
-use App\Actions\RestoreDeedAction;
+use LaravelViews\Actions\RedirectAction;
 use Illuminate\Database\Eloquent\Builder;
 
 class DeletedDeedsTableView extends TableView
@@ -70,6 +71,7 @@ class DeletedDeedsTableView extends TableView
     {
         if (auth()->user()->isAbleTo('forceDdelete-deed')) {
             return [
+                new RedirectAction('admin.deeds.deleted.show', 'Détail', 'eye'),
                 new RestoreDeedAction,
                 new ForceDeleteDeedAction,
             ];

@@ -38,6 +38,10 @@ Route::middleware('auth')->group(function () {
 
         //commons routes(admin and writter)
         Route::view('deeds/deleted', 'admin.deeds.deleted.index')->name('deeds.deleted.index');
+        Route::get('deeds/deleted/{id}', function ($id) {
+            $deed = Deed::onlyTrashed()->findOrFail($id);
+            return view('admin.deeds.deleted.show', compact('deed'));
+        })->name('deeds.deleted.show');
         Route::get('deeds/{deed}/print', PrintDeedController::class)
             ->name('deeds.print');
         Route::view('deeds', 'admin.deeds.index')->name('deeds.index');

@@ -69,16 +69,6 @@ class DeedsTableView extends TableView
         ];
     }
 
-    protected function filters()
-    {
-        return [
-            new DateOfReceipt,
-            new PoleFilter,
-            new TypesOfRequestsFilter,
-            new WarrantyFilter
-        ];
-    }
-
     protected function actionsByRow()
     {
         return [
