@@ -61,7 +61,7 @@ class DeedDetailView extends DetailView
             $data['Montant(Enregistrement)']       = number_format($model->registration_amount, 0, '.', ' ') . " FCFA";
         }
 
-        $files = $model->getMedia('deeds');
+        $files = $model->getMedia();
         $res = "";
         foreach ($files as $file) {
             $link = $file->getUrl();

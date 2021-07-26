@@ -49,13 +49,30 @@ class EditDeedForm extends Component
     }
 
     protected $validationAttributes = [
-        'client'                    => 'Client',
-        'clientCode'                => 'Client',
-        'agencyId'                  => 'Agence',
-        'poleId'                    => 'Pôle',
-        'warrantyId'                => 'Garantie',
-        'referenceOfCreditDecision' => 'Référence décision',
-        'purposeOfTheCredit'        => 'Objet du crédit',
+        'deed.client'                         => 'Client',
+        'deed.client_code'                    => 'Code Client',
+        'deed.notary'                         => 'Notaire',
+        'deed.correspondent_of_the_notary'    => 'Correspondant notaire',
+        'deed.purpose_of_the_credit'          => 'Objet du crédit',
+        'deed.reference_of_credit_decision'   => 'Référence de la décision',
+        'deed.date_of_receipt_of_the_request' => 'Date réception demande',
+        'deed.tax_notice_reference'           => 'Référence avis d\'imposition',
+        'deed.debit_advice_notified'          => 'Avis de débit notifié au client?',
+        'deed.writting_end_date'              => 'Date fin rédaction',
+        'deed.signature_date'                 => 'Date de signature',
+        'deed.writting_completion_date'       => 'Date de complétude',
+        'deed.registration_sending_date'      => 'Date d\'envoi',
+        'deed.registration_return_date'       => 'Date retour',
+        'deed.registration_amount'            => 'Montant',
+        'deed.file_completion_date'           => 'Date complétude dossier',
+        'deed.filing_date'                    => 'Date dépôt dossier',
+        'deed.file_withdrawal_date'           => 'Date de retrait',
+        'deed.date_of_transmission_to_the_BO' => 'Date de transmission au BO Garantie',
+        'deed.inscription_amount'             => 'Montant de l\'inscription',
+        'deed.agency_id'                      => 'Agence',
+        'deed.pole_id'                        => 'Pôle',
+        'deed.warranty_id'                    => 'Garantie',
+        'deed.documentation'                  => 'Documentation',
     ];
 
     protected $messages = [
