@@ -1,10 +1,9 @@
 <input x-data="{ selected: @entangle($attributes->wire('model')) }" x-ref="input"
 x-init="
-new Pikaday({
+picker = new Pikaday({
     field: $refs.input,
     format: 'DD/MM/YYYY',
     i18n: i18n,
-})
-"
-type="text" {{ $attributes }}
-onchange="this.dispatchEvent(new InputEvent('input'))">
+    'defaultDate': selected,
+    onSelect: () => $dispatch('input', picker.toString('YYYY-MM-DD')) })"
+    type="text" {{ $attributes }} autocomplete="off">

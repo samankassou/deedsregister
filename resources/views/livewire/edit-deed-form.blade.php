@@ -10,7 +10,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="client" class="block text-sm font-medium text-gray-700">Client<sup
                                 class="text-red-500">*</sup></label>
-                        <input type="text" wire:model="client" id="client"
+                        <input type="text" wire:model.defer="deed.client" id="client"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md @error('client') is-invalid @enderror">
                         @error('client') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
@@ -18,7 +18,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="clientCode" class="block text-sm font-medium text-gray-700">Code Client<sup
                                 class="text-red-500">*</sup></label>
-                        <input type="text" wire:model="clientCode" id="clientCode"
+                        <input type="text" wire:model.defer="deed.client_code" id="clientCode"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md @error('clientCode') is-invalid @enderror">
                         @error('clientCode') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
@@ -26,7 +26,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="agencyId" class="block text-sm font-medium text-gray-700">Agence<sup
                                 class="text-red-500">*</sup></label>
-                        <select id="agencyId" wire:model="agencyId"
+                        <select id="agencyId" wire:model.defer="deed.agency_id"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             @foreach ($agencies as $agency)
                             <option value="{{ $agency->id }}">{{ $agency->name }}</option>
@@ -38,7 +38,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="poleId" class="block text-sm font-medium text-gray-700">Pôle<sup
                                 class="text-red-500">*</sup></label>
-                        <select id="poleId" wire:model="poleId"
+                        <select id="poleId" wire:model.defer="deed.pole_id"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value="" class="text-gray-300">Sélectionnez un pôle</option>
                             @foreach ($poles as $pole)
@@ -51,7 +51,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="warrantyId" class="block text-sm font-medium text-gray-700">Type de garantie<sup
                                 class="text-red-500">*</sup></label>
-                        <select id="warrantyId" wire:model="warrantyId"
+                        <select id="warrantyId" wire:model.defer="deed.warranty_id"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value="" class="text-gray-300">Sélectionner une garantie</option>
                             @foreach ($warranties as $warranty)
@@ -64,13 +64,13 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="referenceOfCreditDecision" class="block text-sm font-medium text-gray-700">Référence
                             décision de crédit<sup class="text-red-500">*</sup></label>
-                        <input type="text" id="referenceOfCreditDecision" wire:model="referenceOfCreditDecision"
+                        <input type="text" id="referenceOfCreditDecision" wire:model.defer="deed.reference_of_credit_decision"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                     </div>
                     <div class="col-span-6 sm:col-span-3">
                         <label for="purposeOfTheCredit" class="block text-sm font-medium text-gray-700">Objet du
                             crédit<sup class="text-red-500">*</sup></label>
-                        <input type="text" wire:model="purposeOfTheCredit" id="purposeOfTheCredit"
+                        <input type="text" wire:model.defer="deed.purpose_of_the_credit" id="purposeOfTheCredit"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         @error('purposeOfTheCredit') <span class="text-red-500 text-xs italic">{{ $message }}</span>
                         @enderror
@@ -78,7 +78,7 @@
 
                     <div class="col-span-6 sm:col-span-3">
                         <label for="notary" class="block text-sm font-medium text-gray-700">Notaire</label>
-                        <input type="text" wire:model="notary" id="notary"
+                        <input type="text" wire:model.defer="deed.notary" id="notary"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         @error('notary') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
@@ -86,7 +86,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="correspondentOfTheNotary"
                             class="block text-sm font-medium text-gray-700">Correspondant du notaire</label>
-                        <input type="text" wire:model="correspondentOfTheNotary" id="correspondentOfTheNotary"
+                        <input type="text" wire:model.defer="deed.correspondent_of_the_notary" id="correspondentOfTheNotary"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         @error('correspondentOfTheNotary') <span
                             class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -95,7 +95,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="dateOfReceiptOfTheRequest" class="block text-sm font-medium text-gray-700">Date
                             réception demande</label>
-                        <x-date-picker wire:model="dateOfReceiptOfTheRequest" id="dateOfReceiptOfTheRequest"
+                        <input type="date" wire:model.defer="deed.date_of_receipt_of_the_request" id="dateOfReceiptOfTheRequest"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                         @error('dateOfReceiptOfTheRequest') <span
                             class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -136,7 +136,7 @@
                                                 <label for="writtingCompletionDate"
                                                     class="block text-sm font-medium text-gray-700">Date de
                                                     complétude</label>
-                                                <x-date-picker wire:model="writtingCompletionDate"
+                                                <input type="date" wire:model.defer="deed.writting_completion_date"
                                                     id="writtingCompletionDate"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 @error('writtingCompletionDate') <span
@@ -147,7 +147,7 @@
                                                 <label for="writtingEndDate"
                                                     class="block text-sm font-medium text-gray-700">Date fin
                                                     rédaction</label>
-                                                <x-date-picker wire:model="writtingEndDate" id="writtingEndDate"
+                                                <input type="date" wire:model.defer="deed.writting_end_date" id="writtingEndDate"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 @error('writtingEndDate') <span
                                                     class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -157,7 +157,7 @@
                                                 <label for="signatureDate"
                                                     class="block text-sm font-medium text-gray-700">Date de
                                                     signature</label>
-                                                <x-date-picker wire:model="signatureDate" id="signatureDate"
+                                                <input type="date" wire:model.defer="deed.signature_date" id="signatureDate"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 @error('signatureDate') <span
                                                     class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -196,7 +196,7 @@
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="registrationSendingDate"
                                                     class="block text-sm font-medium text-gray-700">Date d'envoi</label>
-                                                <x-date-picker wire:model="registrationSendingDate"
+                                                <input type="date" wire:model.defer="deed.registration_sending_date"
                                                     id="registrationSendingDate"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 @error('registrationSendingDate') <span
@@ -206,7 +206,7 @@
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="registrationReturnDate"
                                                     class="block text-sm font-medium text-gray-700">Date retour</label>
-                                                <x-date-picker wire:model="registrationReturnDate"
+                                                <input type="date" wire:model.defer="deed.registration_return_date"
                                                     id="registrationReturnDate"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 @error('registrationReturnDate') <span
@@ -216,7 +216,7 @@
                                             <div class="col-span-6 sm:col-span-3">
                                                 <label for="writtingAmount"
                                                     class="block text-sm font-medium text-gray-700">Montant</label>
-                                                <input type="text" wire:model="registrationAmount" id="registrationAmount"
+                                                <input type="text" wire:model.defer="deed.registration_amount" id="registrationAmount"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                 @error('registrationAmount') <span
                                                     class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -256,7 +256,7 @@
                                                 <label for="fileCompletionDate"
                                                     class="block text-sm font-medium text-gray-700">Date complétude
                                                     dossier</label>
-                                                <x-date-picker wire:model="fileCompletionDate" id="fileCompletionDate"
+                                                <input type="date" wire:model.defer="deed.file_completion_date" id="fileCompletionDate"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 @error('fileCompletionDate') <span
                                                     class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -266,7 +266,7 @@
                                                 <label for="filingDate"
                                                     class="block text-sm font-medium text-gray-700">Date dépôt
                                                     dossier</label>
-                                                <x-date-picker wire:model="filingDate" id="filingDate"
+                                                <input type="date" wire:model.defer="deed.filing_date" id="filingDate"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 @error('filingDate') <span
                                                     class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -276,7 +276,7 @@
                                                 <label for="fileWithdrawalDate"
                                                     class="block text-sm font-medium text-gray-700">Date de
                                                     retrait</label>
-                                                <x-date-picker wire:model="fileWithdrawalDate" id="fileWithdrawalDate"
+                                                <input type="date" wire:model.defer="deed.file_withdrawal_date" id="fileWithdrawalDate"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 @error('fileWithdrawalDate') <span
                                                     class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -285,7 +285,7 @@
                                                 <label for="dateOfTransmissionToTheBO"
                                                     class="block text-sm font-medium text-gray-700">Date de
                                                     transmission au BO Garantie</label>
-                                                <x-date-picker wire:model="dateOfTransmissionToTheBO"
+                                                <input type="date" wire:model.defer="deed.date_of_transmission_to_the_BO"
                                                     id="dateOfTransmissionToTheBO"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                 @error('dateOfTransmissionToTheBO') <span
@@ -296,7 +296,7 @@
                                                 <label for="inscriptionAmount"
                                                     class="block text-sm font-medium text-gray-700">Montant de
                                                     l'inscription</label>
-                                                <input type="number" wire:model="inscriptionAmount" id="inscriptionAmount"
+                                                <input type="number" wire:model.defer="deed.inscription_amount" id="inscriptionAmount"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                 @error('inscriptionAmount') <span
                                                     class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -312,7 +312,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="taxNoticeReference" class="block text-sm font-medium text-gray-700">Référence avis
                             d'imposition</label>
-                        <input type="text" wire:model="taxNoticeReference" id="taxNoticeReference"
+                        <input type="text" wire:model.defer="deed.tax_notice_reference" id="taxNoticeReference"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         @error('taxNoticeReference') <span class="text-red-500 text-xs italic">{{ $message }}</span>
                         @enderror
@@ -321,7 +321,7 @@
                         <label for="debitAdviceNotified" class="block text-sm font-medium text-gray-700">Avis de débit
                             notifié au
                             client?</label>
-                        <select wire:model="debitAdviceNotified" id="debitAdviceNotified"
+                        <select wire:model.defer="deed.debit_advice_notified" id="debitAdviceNotified"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value=""></option>
                             <option value="oui">Oui</option>
@@ -333,7 +333,7 @@
                     <div class="col-span-6 sm:col-span-3">
                         <label for="documentation" class="block text-sm font-medium text-gray-700">Documentation
                             physique</label>
-                        <textarea wire:model="documentation" id="documentation" rows="3"
+                        <textarea wire:model.defer="deed.documentation" id="documentation" rows="3"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
                         @error('debitAdviceNotified') <span class="text-red-500 text-xs italic">{{ $message }}</span>
                         @enderror
@@ -357,21 +357,23 @@
                                                 {{ count($transmissionSlip) ? count($transmissionSlip)."fichier(s) sélectionné(s)" : "Aucun fichier sélectionné" }}
                                             </div>
                                         </div>
-                                        <input wire:model="transmissionSlip" type="file" class="h-full w-full cursor-pointer opacity-0"
+                                        <input wire:model.defer="transmissionSlip" type="file" class="h-full w-full cursor-pointer opacity-0"
                                             multiple>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="flex flex-col mt-2">
-                            @foreach ($deed->getMedia('deeds') as $file)
-                            <div class="flex justify-between">
-                                <a class="text-indigo-500 underline" href="{{ $file->getUrl() }}">{{ $file->name }}</a> <a class="text-red-500" href="#" wire:click.prevent="deleteFile({{ $file->id }})">Supprimer</a>
-                            </div>
+                            @foreach ($files as $file)
+                                <div x-data="{open: true}" x-show="open" class="flex justify-between">
+                                    <a class="text-indigo-500 underline" href="{{ $file->getUrl() }}">{{ $file->name }}</a> <a class="text-red-500"
+                                        href="#" target="_blank" @click.prevent="open = false" wire:click.prevent="deleteFile({{ $file->id }})"
+                                        x-text="'Supprimer'"></a>
+                                </div>
                             @endforeach
                         </div>
+                        @error('transmissionSlip.*') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
-                    @error('transmissionSlip.*') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
                 </div>
             </div>

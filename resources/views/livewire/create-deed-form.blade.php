@@ -83,7 +83,7 @@
 
                     <div class="col-span-6 sm:col-span-3">
                         <label for="dateOfReceiptOfTheRequest" class="block text-sm font-medium text-gray-700">Date réception demande</label>
-                        <x-date-picker wire:model="dateOfReceiptOfTheRequest" id="dateOfReceiptOfTheRequest"
+                        <input type="date" wire:model.defer="dateOfReceiptOfTheRequest" id="dateOfReceiptOfTheRequest"
                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                         @error('dateOfReceiptOfTheRequest') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                     </div>
@@ -117,7 +117,7 @@
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="writtingCompletionDate" class="block text-sm font-medium text-gray-700">Date de complétude</label>
-                                                    <x-date-picker wire:model="writtingCompletionDate" id="writtingCompletionDate"
+                                                    <input type="date" wire:model="writtingCompletionDate" id="writtingCompletionDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                     @error('writtingCompletionDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
@@ -125,7 +125,7 @@
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="writtingEndDate" class="block text-sm font-medium text-gray-700">Date fin
                                                         rédaction</label>
-                                                    <x-date-picker wire:model="writtingEndDate" id="writtingEndDate"
+                                                    <input type="date" wire:model="writtingEndDate" id="writtingEndDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                         @error('writtingEndDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
@@ -133,7 +133,7 @@
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="signatureDate" class="block text-sm font-medium text-gray-700">Date de
                                                         signature</label>
-                                                    <x-date-picker wire:model="signatureDate" id="signatureDate"
+                                                    <input type="date" wire:model="signatureDate" id="signatureDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                     @error('signatureDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
@@ -170,14 +170,14 @@
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="registrationSendingDate" class="block text-sm font-medium text-gray-700">Date d'envoi</label>
-                                                    <x-date-picker wire:model="registrationSendingDate" id="registrationSendingDate"
+                                                    <input type="date" wire:model="registrationSendingDate" id="registrationSendingDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                     @error('registrationSendingDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="registrationReturnDate" class="block text-sm font-medium text-gray-700">Date retour</label>
-                                                    <x-date-picker wire:model="registrationReturnDate" id="registrationReturnDate"
+                                                    <input type="date" wire:model="registrationReturnDate" id="registrationReturnDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                     @error('registrationReturnDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
@@ -222,7 +222,7 @@
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="fileCompletionDate" class="block text-sm font-medium text-gray-700">Date complétude
                                                         dossier</label>
-                                                    <x-date-picker wire:model="fileCompletionDate" id="fileCompletionDate"
+                                                    <input type="date" wire:model="fileCompletionDate" id="fileCompletionDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                     @error('fileCompletionDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
@@ -230,7 +230,7 @@
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="filingDate" class="block text-sm font-medium text-gray-700">Date dépôt
                                                         dossier</label>
-                                                    <x-date-picker wire:model="filingDate" id="filingDate"
+                                                    <input type="date" wire:model="filingDate" id="filingDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                     @error('filingDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
@@ -238,14 +238,14 @@
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="fileWithdrawalDate" class="block text-sm font-medium text-gray-700">Date de
                                                         retrait</label>
-                                                    <x-date-picker wire:model="fileWithdrawalDate" id="fileWithdrawalDate"
+                                                    <input type="date" wire:model="fileWithdrawalDate" id="fileWithdrawalDate"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                     @error('fileWithdrawalDate') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="dateOfTransmissionToTheBO" class="block text-sm font-medium text-gray-700">Date de
                                                         transmission au BO Garantie</label>
-                                                    <x-date-picker wire:model="dateOfTransmissionToTheBO" id="dateOfTransmissionToTheBO"
+                                                    <input type="date" wire:model="dateOfTransmissionToTheBO" id="dateOfTransmissionToTheBO"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                                                     @error('dateOfTransmissionToTheBO') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
                                                 </div>

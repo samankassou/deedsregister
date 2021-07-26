@@ -28,7 +28,6 @@ class CreateDeedsTable extends Migration
             $table->date('writting_end_date')->nullable();
             $table->date('signature_date')->nullable();
             $table->date('writting_completion_date')->nullable();
-            $table->date('writting_amount')->nullable();
             //registration infos
             $table->date('registration_sending_date')->nullable();
             $table->date('registration_return_date')->nullable();

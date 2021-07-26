@@ -14,15 +14,21 @@ class Deed extends Model implements HasMedia
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
     /**
-     * The attributes that should be mutated to dates.
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $dates = [
-        'date_of_receipt_of_the_request', 'writting_end_date', 'signature_date',
-        'writting_completion_date', 'registration_sending_date',
-        'registration_return_date', 'file_completion_date', 'filing_date',
-        'file_withdrawal_date', 'date_of_transmission_to_the_BO'
+    protected $casts = [
+        'date_of_receipt_of_the_request' => 'date:Y-m-d',
+        'writting_end_date'              => 'date:Y-m-d',
+        'signature_date'                 => 'date:Y-m-d',
+        'writting_completion_date'       => 'date:Y-m-d',
+        'registration_sending_date'      => 'date:Y-m-d',
+        'registration_return_date'       => 'date:Y-m-d',
+        'file_completion_date'           => 'date:Y-m-d',
+        'filing_date'                    => 'date:Y-m-d',
+        'file_withdrawal_date'           => 'date:Y-m-d',
+        'date_of_transmission_to_the_BO' => 'date:Y-m-d'
     ];
 
     /**
@@ -42,66 +48,6 @@ class Deed extends Model implements HasMedia
         'warranty_id', 'agency_id', 'updated_by',
         'created_by', 'deleted_by'
     ];
-
-    public function setDateOfReceiptOfTheRequestAttribute($value)
-    {
-        if ($value)
-            $this->attributes['date_of_receipt_of_the_request'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    }
-
-    public function setWrittingEndDateAttribute($value)
-    {
-        if ($value)
-            $this->attributes['writting_end_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    }
-
-    public function setSignatureDateAttribute($value)
-    {
-        if ($value)
-            $this->attributes['signature_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    }
-
-    public function setWrittingCompletionDateAttribute($value)
-    {
-        if ($value)
-            $this->attributes['writting_completion_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    }
-
-    public function setRegistrationSendingDateAttribute($value)
-    {
-        if ($value)
-            $this->attributes['registration_sending_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    }
-
-    public function setRegistrationReturnDateAttribute($value)
-    {
-        if ($value)
-            $this->attributes['registration_return_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    }
-
-    public function setFileCompletionDateAttribute($value)
-    {
-        if ($value)
-            $this->attributes['file_completion_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    }
-
-    public function setFilingDateAttribute($value)
-    {
-        if ($value)
-            $this->attributes['filing_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    }
-
-    public function setFileWithdrawalDateAttribute($value)
-    {
-        if ($value)
-            $this->attributes['file_withdrawal_date'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    }
-
-    public function setDateOfTransmissionToTheBOAttribute($value)
-    {
-        if ($value)
-            $this->attributes['date_of_transmission_to_the_BO'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    }
 
     public function pole()
     {

@@ -101,6 +101,7 @@ class CreateDeedForm extends Component
 
     public function store()
     {
+        //dd($this->dateOfReceiptOfTheRequest);
         $this->validate();
         $data = [
             'client'                         => $this->client,
@@ -134,7 +135,7 @@ class CreateDeedForm extends Component
         foreach ($this->transmissionSlip as $file) {
             $deed->addMedia($file->getRealPath())
                 ->usingName($file->getClientOriginalName())
-                ->toMediaCollection('deeds', 'public');
+                ->toMediaCollection();
         }
 
         $deed->typeOfRequests()->attach($this->typesOfRequest);
