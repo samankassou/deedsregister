@@ -142,3 +142,4 @@ class EditDeedForm extends Component
         return view('livewire.edit-deed-form');
     }
 }
+>

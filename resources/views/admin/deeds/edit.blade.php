@@ -1,9 +1,7 @@
 @extends('layouts.admin', ['title' => 'Modifier un acte'])
 @section('styles')
 @parent
-<link href="{{ asset('vendor/select2/select2.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('vendor/choices.js/choices.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('vendor/pickaday/pikaday.css') }}" rel="stylesheet" />
 @endsection
 @section('content')
 @include('admin.deeds.partials.top')
@@ -13,10 +11,5 @@
 @endsection
 @section('scripts')
 @parent
-<script src="{{ asset('vendor/moment-with-locales.min.js') }}"></script>
-<script src="{{ asset('vendor/pickaday/french.js') }}"></script>
-<script src="{{ asset('vendor/pickaday/pikaday.js') }}"></script>
-<script src="{{ asset('vendor/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
 <script src="{{ asset('vendor/choices.js/choices.min.js') }}"></script>
 @endsection

@@ -18,7 +18,7 @@ class CreateDeedForm extends Component
     public $warranties;
     public $agencies;
     public $typesOfRequests;
-    public $typesOfRequest;
+    public $typesOfRequest = [];
     public $deed;
 
     //user inputs
@@ -94,7 +94,7 @@ class CreateDeedForm extends Component
         $this->typesOfRequests = TypeOfRequest::all();
         $this->warranties      = Warranty::all();
         $this->agencies        = Agency::all();
-        $this->deed        = new Deed();
+        $this->deed            = new Deed();
     }
 
     public function save()
