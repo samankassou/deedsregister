@@ -241,22 +241,4 @@
 @endsection
 @section('scripts')
     @laravelViewsScripts('laravel-views')
-    <script src="{{ asset('vendor/sweetalert/sweetalert2@11.js') }}"></script>
-    <script src="{{ asset('js/alert.js') }}"></script>
-    <script>
-        document.addEventListener('alert-emit', event =>{
-            Toast.fire({
-                icon: event.detail.alert,
-                title: event.detail.message
-            })
-        })
-    </script>
-    @if (session('alert'))
-        <script>
-            Toast.fire({
-                icon : "{{ session('alert') }}",
-                title: "{{ session('message') }}"
-            })
-        </script>
-    @endif
 @endsection

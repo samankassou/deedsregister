@@ -19,7 +19,9 @@ use App\Http\Controllers\Admin\PrintDeedController;
 */
 
 Route::view('/', 'home')->name('home');
-
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
 
 //deeds routes
 Route::middleware('auth')->group(function () {

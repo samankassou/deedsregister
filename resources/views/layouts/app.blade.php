@@ -26,6 +26,31 @@
     </div>
     @livewireScripts
     @livewire('livewire-ui-modal')
+    <script src="{{ asset('vendor/sweetalert/sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
+    <script>
+        document.addEventListener('alert-emit', event =>{
+                Toast.fire({
+                    icon: event.detail.alert,
+                    title: event.detail.message
+                })
+            })
+    </script>
+    @if (session('alert'))
+    <script>
+        Toast.fire({
+                    icon : "{{ session('alert') }}",
+                    title: "{{ session('message') }}"
+                })
+    </script>
+    @endif
+    @if (session('unauthenticated'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+                    Livewire.emit('openModal', 'auth.login-form')
+                })
+    </script>
+    @endif
     @yield('scripts')
 </body>
 

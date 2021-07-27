@@ -2,13 +2,19 @@
 
 namespace App\Http\Livewire;
 
-use App\Jobs\SendWelcomeEmail;
-use App\Mail\WelcomeMail;
 use App\Models\Role;
 use Livewire\Component;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use App\Models\User as Model;
+use App\Jobs\SendWelcomeEmail;
+use Illuminate\Support\Facades\DB;
+use App\Mail\ResetPasswordLinkMail;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\ValidationException;
 
 class User extends Component
 {
@@ -18,6 +24,9 @@ class User extends Component
 
     public $name;
     public $email;
+
+    // admin confirm paswword
+    public $password;
 
 
     public $mode = 'create';
@@ -33,6 +42,7 @@ class User extends Component
     public $search;
 
     public $showConfirmDeletePopup = false;
+    public $showConfirmResetPswPopup = false;
 
     protected function rules()
     {
@@ -153,6 +163,42 @@ class User extends Component
     {
         $this->primaryId = $primaryId;
         $this->showConfirmDeletePopup = true;
+    }
+
+    public function confirmReset($primaryId)
+    {
+        $this->primaryId = $primaryId;
+        $this->showConfirmResetPswPopup = true;
+    }
+
+    public function sendResetLink()
+    {
+        $this->validate(['password' => 'required']);
+        $admin = Model::find(auth()->user()->id);
+
+        // check if the user type the good password
+        if (!Hash::check($this->password, $admin->password)) {
+            throw ValidationException::withMessages(['password' => 'Mot de passe incorrect!']);
+        }
+
+        $user = Model::find($this->primaryId);
+
+        $status = Password::sendResetLink(
+            ['email' => $user->email]
+        );
+
+        $this->hideResetPasswordPopup();
+        $this->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Lien de réinitialisation envoyé!'
+        ]);
+    }
+
+    public function hideResetPasswordPopup()
+    {
+        $this->primaryId = null;
+        $this->password = '';
+        $this->showConfirmResetPswPopup = false;
     }
 
     public function destroy()

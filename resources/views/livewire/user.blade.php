@@ -6,8 +6,8 @@
                     <div class="overflow-hidden  sm:rounded-lg p-2 flex flex-row justify-end">
                         <div>
                             <button type="submit"
-                                class="inline-flex items-center px-3 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                                wire:click="create">
+                                class="inline-flex items-center px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                                wire:click.prevent="create">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -91,10 +91,19 @@
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    @livewire('toggle-user-status', ['user' => $row->id])
+                                    <livewire:toggle-user-status :user="$row->id" :key="time().$row->id">
                                 </td>
                                 <td
-                                    class="flex items-center justify-end px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    class="flex items-center justify-end px-6 py-4 whitespace-nowrap text-right text-sm font-medium gap-1">
+                                    <a href="#" title="Modifier" class="text-indigo-600 hover:text-indigo-900"
+                                        wire:click="confirmReset({{ $row->id }})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw w-5 h-5">
+                                            <polyline points="23 4 23 10 17 10"></polyline>
+                                            <polyline points="1 20 1 14 7 14"></polyline>
+                                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                                        </svg>
+                                    </a>
                                     <a href="#" title="Modifier" class="text-indigo-600 hover:text-indigo-900"
                                         wire:click="edit({{ $row->id }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
@@ -264,4 +273,56 @@
         </div>
         @endif
         {{--    /delete popup--}}
+
+        {{--    reset password confirm popup--}}
+        @if($showConfirmResetPswPopup)
+        <div class="fixed z-10 inset-0 overflow-y-auto transition-opacity duration-150" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-200 opacity-75 transition-opacity" aria-hidden="true"></div>
+
+                <!-- This element is to trick the browser into centering the modal contents. -->
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div
+                    class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full mx-auto">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                    Confirmer la réinitialisation du mot de passe
+                                </h3>
+                                <div class="mt-2">
+                                    <div>
+                                        <label class='block'><span class='text-gray-700 @error(' password') text-red-500 @enderror'>Entrez votre mot de passe</span>
+                                            <input type='password' class='mt-1 block w-full rounded-md border-gray-300 shadow-sm @error(' password') border-red-500
+                                                @enderror focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                                                wire:model.defer='password'>@error('password')<span class='text-red-500 text-sm'>{{ $message }}</span>@enderror
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button wire:click="sendResetLink" type="button"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                            Envoyer le lien
+                        </button>
+                        <button wire:click="hideResetPasswordPopup" type="button"
+                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                            Annuler
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        {{--    /reset passwordconfirm popup--}}
     </div>
