@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Charts;
 
+use App\Models\TypeOfRequest;
 use Chartisan\PHP\Chartisan;
 use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class TypesOfRequestsChart extends BaseChart
      * from the blade directrive. If null, the chart
      * name will be used.
      */
-    public ?string $routeName = 'typesOfRequests.chart';
+    public ?string $routeName = 'types_of_requests';
     /**
      * Handles the HTTP request for the given chart.
      * It must always return an instance of Chartisan
@@ -31,9 +32,15 @@ class TypesOfRequestsChart extends BaseChart
      */
     public function handler(Request $request): Chartisan
     {
+        $labels = [];
+        $values = [];
+        $typesOfRequests = TypeOfRequest::withCount('deeds')->get();
+        foreach ($typesOfRequests as $type) {
+            $labels[] = $type->name;
+            $values[] = $type->deeds_count;
+        }
         return Chartisan::build()
-            ->labels(['First', 'Second', 'Third'])
-            ->dataset('Sample', [1, 2, 3])
-            ->dataset('Sample 2', [3, 2, 1]);
+            ->labels($labels)
+            ->dataset('Sample', $values);
     }
 }

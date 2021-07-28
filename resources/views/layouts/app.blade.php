@@ -8,6 +8,7 @@
     <title>{{ $title ?? "Inconnu" }} | {{ config('app.name') }}</title>
     <link rel="icon" href="{{ asset('favicon.jpeg') }}" type="image/jpeg" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <style>
         /* Toggle A */
         input:checked ~ .dot {
@@ -17,6 +18,7 @@
     </style>
     @livewireStyles
     <script src="{{ asset('js/vendor/alpine.min.js') }}" defer></script>
+    <script src="{{  asset('template/js/init-alpine.js') }}"></script>
     @yield('styles')
 </head>
 
@@ -24,6 +26,7 @@
     <div class="container mx-auto">
         @yield('main')
     </div>
+    @routes
     @livewireScripts
     @livewire('livewire-ui-modal')
     <script src="{{ asset('vendor/sweetalert/sweetalert2@11.js') }}"></script>

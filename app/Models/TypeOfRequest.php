@@ -18,4 +18,9 @@ class TypeOfRequest extends Model
     protected $table = 'type_of_requests';
 
     public $timestamps = false;
+
+    public function deeds()
+    {
+        return $this->belongsToMany(Deed::class, 'deed_type_of_request', 'type_of_request_id', 'deed_id')->withTimestamps();
+    }
 }

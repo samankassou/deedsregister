@@ -11,4 +11,9 @@ class Pole extends Model
     use HasFactory, HasRandomId;
 
     public $timestamps = false;
+
+    public function deeds()
+    {
+        return $this->hasMany(Deed::class);
+    }
 }

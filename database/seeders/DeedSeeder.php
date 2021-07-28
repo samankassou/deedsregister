@@ -14,7 +14,7 @@ class DeedSeeder extends Seeder
      */
     public function run()
     {
-        Deed::factory(10)
+        Deed::factory(40)
             ->create()->each(function ($deed) {
                 $deed->typeOfRequests()->attach(rand(1, 3));
             });

@@ -77,31 +77,20 @@
     </div>
     <!-- Charts -->
     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-        Charts
+        Statistiques
     </h2>
-    <div class="grid gap-6 mb-8 md:grid-cols-2">
+    <div class="grid gap-6 mb-10 md:grid-cols-2">
         <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                Demandes
+                Demandes par types
             </h4>
             <div id="requestsChart" style="height: 300px"></div>
         </div>
         <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                Traffic
+                Actes par pôles
             </h4>
-            <canvas id="line"></canvas>
-            <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                <!-- Chart legend -->
-                <div class="flex items-center">
-                    <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                    <span>Organic</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                    <span>Paid</span>
-                </div>
-            </div>
+            <div id="deedsByPolesChart" style="height: 300px"></div>
         </div>
     </div>
 @endsection
@@ -109,17 +98,15 @@
 <script src="{{ asset('vendor/chartjs/echarts.min.js') }}"></script>
 <script src="{{ asset('vendor/chartjs/chartisan_echarts.js') }}"></script>
 <script>
-    const Chartdata = {
-        chart: {labels: ['Rédaction', 'Inscription', 'Enregistrement']},
-        datasets: [
-            {name: 'Sample 1', values: [10, 3, 7]},
-            {name: 'Sample 2', values: [1, 6, 2]},
-        ],
-    }
-    const chart = new Chartisan({
+    const requestsChart = new Chartisan({
         el: "#requestsChart",
-        data: Chartdata,
+        url: route('charts.types_of_requests'),
     })
-    console.log('test')
+
+    const deedsByPolesChart = new Chartisan({
+        el: "#deedsByPolesChart",
+        url: route('charts.deeds_by_poles_chart'),
+        hooks: new ChartisanHooks().datasets([{ type: 'pie', fill: false }, 'bar']),
+    })
 </script>
 @endsection
