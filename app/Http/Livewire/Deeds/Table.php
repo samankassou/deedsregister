@@ -4,7 +4,10 @@ namespace App\Http\Livewire\Deeds;
 
 use App\Models\Deed;
 use Livewire\Component;
+use App\Exports\DeedExport;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Database\Eloquent\Builder;
 
 class Table extends Component
 {
@@ -18,11 +21,32 @@ class Table extends Component
 
     public $paginate = 10;
 
-    protected $listeners = ['showDeletePopUp'];
+    protected $listeners = [
+        'showDeletePopUp',
+        'exportToExcel',
+        'paginate'
+    ];
 
-    public function mount()
+    /**
+     * Sets a initial query with the data to fill the table
+     *
+     * @return Builder Eloquent query
+     */
+    public function repository(): Builder
     {
-        //$this->deeds = Deed::paginate($this->paginate);
+        return Deed::latest()->with(['agency', 'pole', 'warranty', 'typeOfRequests']);
+    }
+
+    public function filteredData()
+    {
+        return $this->repository()
+            ->where('client', 'like', '%' . $this->search . '%')
+            ->orWhere('client_code', 'like', '%' . $this->search . '%');
+    }
+
+    public function filteredDataWithPagination()
+    {
+        return $this->filteredData()->paginate($this->paginate);
     }
 
     public function updatingSearch()
@@ -32,10 +56,9 @@ class Table extends Component
 
     public function render()
     {
-        $deeds = Deed::where('client', 'like', '%' . $this->search . '%')
-            ->orWhere('client_code', 'like', '%' . $this->search . '%')
-            ->paginate($this->paginate);
-        return view('livewire.deeds.table', compact('deeds'));
+        return view('livewire.deeds.table', [
+            'deeds' => $this->filteredDataWithPagination()
+        ]);
     }
 
     public function showDeletePopUp($id)
@@ -48,6 +71,18 @@ class Table extends Component
     {
         $this->primaryId = null;
         $this->showConfirmDeletePopup = false;
+    }
+
+    public function paginate($value)
+    {
+        $this->paginate = $value;
+    }
+
+    public function exportToExcel()
+    {
+        $data = $this->filteredData()->get();
+        $fileName = 'liste_des_actes_' . today()->format('d-m-Y') . '.xlsx';
+        return Excel::download(new DeedExport(collect($data)), $fileName);
     }
 
     public function deleteDeed()

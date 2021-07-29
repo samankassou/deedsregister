@@ -14,7 +14,7 @@
     <div class="w-full border rounded-lg shadow-xs">
         <div class="flex justify-between">
             <h3 class="text-xl text-center text-indigo-600 font-bold md:ml-3 md:mt-3 md:text-left">Liste des actes</h3>
-            <a href="#" onclick="Livewire.emit('export')"
+            <a href="#" onclick="Livewire.emit('exportToExcel')"
                 class="flex items-center px-3 py-2 m-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -22,14 +22,14 @@
                 </svg>Exporter
             </a>
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center gap-1">
             <select class="ml-3 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md" onchange="Livewire.emit('paginate', this.value)">
                 <option value="5">5</option>
                 <option value="10" selected>10</option>
                 <option value="20">20</option>
                 <option value="30">30</option>
                 <option value="10000">Tout</option>
-            </select><span>Par page</span>
+            </select><span class="text-gray-500">Par page</span>
         </div>
         @livewire('deeds.table')
     </div>
