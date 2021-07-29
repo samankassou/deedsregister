@@ -31,6 +31,6 @@
                 <option value="10000">Tout</option>
             </select><span>Par page</span>
         </div>
-        @livewire('deeds.deeds-table-view')
+        @livewire('deeds.table')
     </div>
 @endsection
