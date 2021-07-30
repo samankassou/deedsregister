@@ -1,7 +1,8 @@
 <tr class="border-b border-gray-200 text-sm">
     <td class="pl-3">
         <span class="flex items-center justify-center">
-            <input type="checkbox" class="w-4 h-4 rounded" value="40" wire:model="selected"> </span>
+            <input type="checkbox" class="w-4 h-4 rounded" value="{{ $deed->id }}" wire:click="$emit('toggleSelected', {{ $deed->id }})" @if($selected) checked @endif>
+        </span>
     </td>
 
     <td class="px-3 py-2 whitespace-no-wrap text-gray-500">

@@ -16,6 +16,7 @@ class Table extends Component
 
     public $search;
     public $primaryId;
+    public $selected = [];
 
     public $showConfirmDeletePopup = false;
 
@@ -24,6 +25,8 @@ class Table extends Component
     protected $listeners = [
         'showDeletePopUp',
         'exportToExcel',
+        'toggleSelected',
+        'toggleSelectAll',
         'paginate'
     ];
 
@@ -34,14 +37,16 @@ class Table extends Component
      */
     public function repository(): Builder
     {
-        return Deed::latest()->with(['agency', 'pole', 'warranty', 'typeOfRequests']);
+        return Deed::latest();
     }
 
     public function filteredData()
     {
+        $search = '%' . $this->search . '%';
         return $this->repository()
-            ->where('client', 'like', '%' . $this->search . '%')
-            ->orWhere('client_code', 'like', '%' . $this->search . '%');
+            ->where('client', 'LIKE', $search)
+            ->orWhere('client_code', 'LIKE', $search)
+            ->orWhere('notary', 'LIKE', $search);
     }
 
     public function filteredDataWithPagination()
@@ -61,7 +66,7 @@ class Table extends Component
         ]);
     }
 
-    public function showDeletePopUp($id)
+    public function showDeletePopUp($id = null)
     {
         $this->primaryId = $id;
         $this->showConfirmDeletePopup = true;
@@ -85,13 +90,60 @@ class Table extends Component
         return Excel::download(new DeedExport(collect($data)), $fileName);
     }
 
+    public function delete()
+    {
+        if (count($this->selected)) {
+            $this->massDelete();
+        } else {
+            $this->deleteDeed();
+        }
+    }
+
+    public function toggleSelectAll()
+    {
+        if (count($this->selected)) {
+            $this->reset(['selected']);
+        } else {
+            $this->selected = Deed::pluck('id')->toArray();
+        }
+    }
+
     public function deleteDeed()
     {
-        Deed::find($this->primaryId)->delete();
+        $deed = Deed::find($this->primaryId);
+        $deed->update(['deleted_by' => auth()->user()->id]);
+        $deed->delete();
+        $this->emit('deedDeleted');
         $this->dispatchBrowserEvent('alert-emit', [
             'alert' => 'success',
             'message' => 'Acte supprimé avec succès'
         ]);
         $this->closeDeletePopUp();
+    }
+
+    public function toggleSelected($id)
+    {
+        if (($key = array_search($id, $this->selected)) !== false) {
+            unset($this->selected[$key]);
+        } else {
+            array_push($this->selected, $id);
+        }
+    }
+
+    public function massDelete()
+    {
+        //dd($this->selected);
+        $deeds = Deed::whereIn('id', $this->selected)->get();
+        $deeds->each(function ($deed) {
+            $deed->update(['deleted_by' => auth()->user()->id]);
+            $deed->delete();
+        });
+        $this->reset(['selected']);
+        $this->emit('deedDeleted');
+        $this->closeDeletePopUp();
+        $this->dispatchBrowserEvent('alert-emit', [
+            'alert' => 'success',
+            'message' => 'Acte(s) supprimé(s) avec succès'
+        ]);
     }
 }

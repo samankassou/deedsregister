@@ -8,6 +8,9 @@ use Livewire\Component;
 class TableRow extends Component
 {
     public $deed;
+    public $selected = false;
+
+    protected $listeners = ['toggleSelectAll'];
 
     public function mount(Deed $deed)
     {
@@ -16,5 +19,10 @@ class TableRow extends Component
     public function render()
     {
         return view('livewire.deeds.table-row');
+    }
+
+    public function toggleSelectAll()
+    {
+        $this->selected = !$this->selected;
     }
 }

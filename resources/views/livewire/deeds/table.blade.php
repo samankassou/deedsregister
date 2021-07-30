@@ -23,17 +23,41 @@
                 </div>
             </div>
 
-
             <div class="flex space-x-1 flex-1 justify-end items-center mb-4">
-
-                <div>
+                @if (count($selected))
                     <div class="flex space-x-1">
+                        <div class="relative" x-data="{ open: false }">
+                            <span @click="open = true" class="cursor-pointer">
+                                <button
+                                    class="border border-transparent hover:border-gray-300 focus:border-gray-300 focus:outline-none flex items-center gap-1 text-xs px-3 py-2 rounded hover:shadow-sm font-medium">
+                                    Actions
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-chevron-down w-4 h-4">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                            </span>
 
+                            <div class="bg-white shadow-lg rounded absolute top-8 right-0 border text-left z-10 w-64"
+                                x-show.transition="open" @click.away="open = false" style="display: none;">
+                                <div
+                                    class="border-b border-t border-gray-200 bg-gray-100 text-xs font-semibold uppercase text-left px-4 py-2">
+                                    {{ count($selected) }} Sélection{{ count($selected) > 1 ? 's' : '' }}
+                                </div>
+                                <button wire:click.prevent="showDeletePopUp" title="Supprimer"
+                                    class="group flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full focus:outline-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                    Supprimer
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -47,7 +71,7 @@
                 <tr>
                     <th class="pl-3">
                         <span class="flex items-center justify-center">
-                            <input type="checkbox" class="w-4 h-4 rounded" wire:model="allSelected"> </span>
+                            <input type="checkbox" class="w-4 h-4 rounded" wire:click="$emit('toggleSelectAll')"> </span>
                     </th>
 
                     <th class="px-3 py-3">
@@ -111,7 +135,7 @@
                         </div>
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                                Supprimer un acte
+                                Suppression d'acte
                             </h3>
                             <div class="mt-2">
                                 <p class="text-sm text-gray-500">
@@ -121,12 +145,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button wire:click="deleteDeed()" type="button"
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:items-center sm:gap-2 sm:flex-row-reverse">
+                    <button wire:click="delete()" type="button" wire:loading.attr="disabled"
                         class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
                         Supprimer
+                        <span wire:loading wire:target="delete" class="flex items-center justify-center h-3 w-3">
+                            <span class="animate-spin absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
+                        </span>
                     </button>
-                    <button wire:click="closeDeletePopUp" type="button"
+                    <button wire:click="closeDeletePopUp" type="button" wire:loading.attr="disabled" wire:loading.class="cursor-not-allowed"
                         class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                         Annuler
                     </button>
