@@ -55,5 +55,6 @@ Route::middleware('auth')->group(function () {
             return view('admin.deeds.show', compact('deed'));
         })->name('deeds.show');
         Route::view('settings', 'admin.settings.index')->name('settings.index');
+        Route::view('help', 'admin.help')->name('help');
     });
 });
