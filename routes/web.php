@@ -54,5 +54,6 @@ Route::middleware('auth')->group(function () {
         Route::get('deeds/{deed}', function (Deed $deed) {
             return view('admin.deeds.show', compact('deed'));
         })->name('deeds.show');
+        Route::view('settings', 'admin.settings.index')->name('settings.index');
     });
 });
