@@ -41,6 +41,6 @@ class TypesOfRequestsChart extends BaseChart
         }
         return Chartisan::build()
             ->labels($labels)
-            ->dataset('Sample', $values);
+            ->dataset('Nombre de demandes', $values);
     }
 }

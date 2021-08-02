@@ -80,7 +80,7 @@
     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         Statistiques
     </h2>
-    <div class="grid gap-6 mb-10 md:grid-cols-2">
+    <div class="grid gap-6 mb-10 md:grid-cols-1">
         <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
             <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
                 Demandes par types
@@ -102,12 +102,13 @@
     const requestsChart = new Chartisan({
         el: "#requestsChart",
         url: route('charts.types_of_requests'),
+        hooks: new ChartisanHooks().legend({ position: 'bottom' }).tooltip(),
     })
 
     const deedsByPolesChart = new Chartisan({
         el: "#deedsByPolesChart",
         url: route('charts.deeds_by_poles_chart'),
-        hooks: new ChartisanHooks().datasets([{ type: 'pie', fill: false }, 'bar']),
+        hooks: new ChartisanHooks().datasets([{ type: 'pie', fill: false }, 'bar']).tooltip(),
     })
 </script>
 @endsection

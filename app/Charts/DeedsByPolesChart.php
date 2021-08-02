@@ -27,6 +27,6 @@ class DeedsByPolesChart extends BaseChart
         }
         return Chartisan::build()
             ->labels($labels)
-            ->dataset('Sample', $values);
+            ->dataset('Nombre  d\'actes par pôle', $values);
     }
 }
