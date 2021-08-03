@@ -16,6 +16,7 @@ class Table extends Component
 
     public $search;
     public $primaryId;
+    public $filters = [];
     public $selected = [];
 
     public $showConfirmDeletePopup = false;
@@ -27,7 +28,8 @@ class Table extends Component
         'exportToExcel',
         'toggleSelected',
         'toggleSelectAll',
-        'paginate'
+        'paginate',
+        'filterSelected' => 'addFilter',
     ];
 
     /**
@@ -43,10 +45,17 @@ class Table extends Component
     public function filteredData()
     {
         $search = '%' . $this->search . '%';
-        return $this->repository()
+        $query = $this->repository()
             ->where('client', 'LIKE', $search)
             ->orWhere('client_code', 'LIKE', $search)
             ->orWhere('notary', 'LIKE', $search);
+        if (count($this->filters)) {
+            $query->whereHas('TypeOfRequests', function ($query) {
+                $query->whereIn('type_of_requests.id', $this->filters['TypeOfRequest']);
+            });
+        }
+
+        return $query;
     }
 
     public function filteredDataWithPagination()
@@ -145,5 +154,11 @@ class Table extends Component
             'alert' => 'success',
             'message' => 'Acte(s) supprimé(s) avec succès'
         ]);
+    }
+
+    public function addFilter($filterName, $filterValue)
+    {
+        $this->filters[$filterName] = $filterValue;
+        //dd($this->filters, $filterName, $filterValue);
     }
 }
